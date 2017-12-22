@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\-----Util-----">
+      <UniqueIdentifier>{7c9b74e3-1f28-4748-bbd7-48c3b9d2b6ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Util-----\List">
+      <UniqueIdentifier>{e65bfe11-c38c-4aed-8568-d054586ca633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Util-----\Vector2D">
+      <UniqueIdentifier>{105a395c-0a06-421c-a6cd-511fae761ec8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----">
+      <UniqueIdentifier>{c0a98ffb-dcf5-4b2e-a49f-332577a84b86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\Game">
+      <UniqueIdentifier>{2c051e9f-40c0-4e4a-b221-a23ec6fcda0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\GameFrame">
+      <UniqueIdentifier>{e9dbb2d5-8ee5-468b-b408-105eb33f3b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Unit-----">
+      <UniqueIdentifier>{81c8c5ad-8c2e-4f1d-a2f9-a3dac179bdcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Unit">
+      <UniqueIdentifier>{e66653b2-0342-41b2-92f8-8b6e7b0a525e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Marine">
+      <UniqueIdentifier>{838a3fe9-db8f-4a45-b001-bb02ec9d4a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Ultra">
+      <UniqueIdentifier>{72b4be1a-6d7c-4d94-a2bc-ab22210887d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Zergling">
+      <UniqueIdentifier>{8afad05b-c243-4ea6-a353-353492d01e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----WinMain-----">
+      <UniqueIdentifier>{e29cf7c3-6a83-4cff-af1a-cdf8942e3d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----WinMain-----\WinMain">
+      <UniqueIdentifier>{cb71be12-831d-4d30-833e-07ad770fa5c1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>소스 파일\-----Game-----\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameFrame.h">
+      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>소스 파일\-----Util-----\List</Filter>
+    </ClInclude>
+    <ClInclude Include="Marine.h">
+      <Filter>소스 파일\-----Unit-----\Marine</Filter>
+    </ClInclude>
+    <ClInclude Include="Zergling.h">
+      <Filter>소스 파일\-----Unit-----\Zergling</Filter>
+    </ClInclude>
+    <ClInclude Include="Ultra.h">
+      <Filter>소스 파일\-----Unit-----\Ultra</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>소스 파일\-----Util-----\Vector2D</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="protoType.cpp">
+      <Filter>소스 파일\-----WinMain-----\WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일\-----WinMain-----\WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>소스 파일\-----Game-----\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFrame.cpp">
+      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>소스 파일\-----Util-----\List</Filter>
+    </ClCompile>
+    <ClCompile Include="Marine.cpp">
+      <Filter>소스 파일\-----Unit-----\Marine</Filter>
+    </ClCompile>
+    <ClCompile Include="Zergling.cpp">
+      <Filter>소스 파일\-----Unit-----\Zergling</Filter>
+    </ClCompile>
+    <ClCompile Include="Ultra.cpp">
+      <Filter>소스 파일\-----Unit-----\Ultra</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>소스 파일\-----Util-----\Vector2D</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="protoType.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="protoType.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
