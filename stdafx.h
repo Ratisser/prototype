@@ -31,5 +31,6 @@
 #include "Marine.h"
 #include "Zergling.h"
 #include "Ultra.h"
+#include "Sara.h"
 #include "Vector2.h"
 

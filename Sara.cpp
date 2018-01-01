@@ -1,37 +1,35 @@
-#include "Marine.h"
 #include "stdafx.h"
+#include "Sara.h"
 
+const int Sara::TOTAL_IMAGE_COUNT = 51;
+const int Sara::UNIT_IMAGE_COUNT = 51;
+int Sara::msprStop[] = { 0 };
+int Sara::msprMove[] = { 1,1,1,1,1,2,2,2,2,2 };
 
-const int Marine::TOTAL_IMAGE_COUNT = 229;
-const int Marine::UNIT_IMAGE_COUNT = 221;
-int Marine::msprStop[] = { 0 };
-int Marine::msprMove[] = { 4,5,6,7,8,9,10,11,12};
-
-Marine::Marine()
+Sara::Sara()
 	:Unit()
 {
-	mUnitID = MARINE;
+	mUnitID = SARA;
 	mMoveSpeed = 5.0f;
-	mUnitSize = 17;
-	SetImg(64, 64, RGB(0, 0, 0));
+	mUnitSize = 31;
+	SetImg(43, 62, RGB(255, 255, 255));
 }
 
 
-Marine::~Marine()
+Sara::~Sara()
 {
 }
 
-
-void Marine::onStop() {
+void Sara::onStop() {
 	mAnim = 0;
 	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * msprStop[mAnim] - (mDegree == 9);
 }
 
-void Marine::onMove() {
+void Sara::onMove() {
 	mvPos.x += mvDirection.x * mMoveSpeed;
 	mvPos.y += mvDirection.y * mMoveSpeed;
 	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * msprMove[mAnim] - (mDegree == 9);
 	mAnim++;
-	mAnim = mAnim % 8;
+	mAnim = mAnim % 10;
 
 }

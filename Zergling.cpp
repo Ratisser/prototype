@@ -11,8 +11,9 @@ Zergling::Zergling()
 	:Unit()
 {
 	mUnitID = ZERGLING;
-	mBitmapSize = 128;
-	mMoveSpeed = 15.0f;
+	mMoveSpeed = 10.0f;
+	mUnitSize = 12;
+	SetImg(128, 128, RGB(0, 0, 0));
 }
 
 
@@ -26,8 +27,8 @@ void Zergling::onStop() {
 }
 
 void Zergling::onMove() {
-	mPos.x += mDirection.x * mMoveSpeed;
-	mPos.y += mDirection.y * mMoveSpeed;
+	mvPos.x += mvDirection.x * mMoveSpeed;
+	mvPos.y += mvDirection.y * mMoveSpeed;
 	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + (17 * msprMove[mAnim]) - (mDegree == 9);
 	mAnim++;
 	mAnim = mAnim % 8;

@@ -13,29 +13,73 @@ Unit::~Unit() {
 
 }
 
+void Unit::SetImg(int width, int height, UINT rgbColor) {
+	mUnitImage.bitWidth = width;
+	mUnitImage.bitHeight = height;
+	mUnitImage.transColor = rgbColor;
+}
+
 void Unit::UnitProcess() {
 	checkRange();
 
-	Vec2Dir(&mDirection, &mPos, &mvTarget);
-	mDegree = TODEG(Vec2Theta(&mDirection)) / 20;
+	Vec2Dir(&mvDirection, &mvPos, &mvTarget);
+	mDegree = TODEG(Vec2Theta(&mvDirection)) / 20;
 
 	switch (mUnitState)
 	{
 	case STOP:
+		mCollisionCount = 0;
 		onStop();
+		SetState(WATCH);
 		break;
 	case WATCH:
 
 		break;
 	case MOVE:
 	{
+
 		DWORD curTime = Game::GetInstance()->GetTime();
 		if ((curTime - mdwAnimTime) > 50) {
 			onMove();
 			mdwAnimTime = curTime;
 		}
+		// 충돌 검사
+		Unit** pUnit = Unit::GetUnitList();
+		VECTOR2 *point;
+		int unitSize = mUnitSize * mUnitSize;
+		int curUnitSize;
+		int distance;
+		for (int i = 0; i < Unit::GetUnitCount(); i++) {
+			if ((*pUnit) == this) {
+				*pUnit++;
+				continue;
+			}
+			point = (*pUnit)->GetPos();
+			curUnitSize = (*pUnit)->GetUnitSize();
+			curUnitSize = curUnitSize * curUnitSize;
+			distance = curUnitSize + unitSize;
+			if ((mvPos.x - point->x) * (mvPos.x - point->x) < distance && (mvPos.y - point->y)*(mvPos.y - point->y) < distance) {
+				if ((*pUnit)->GetState() != STOP) {
+					mMoveSpeed *= -1;
+					onMove();
+					mMoveSpeed *= -1;
+					SetState(COLLISION);
+					return;
+				}
+				else {
+					// TODO : 길찾기 알고리즘
+					mMoveSpeed *= -1;
+					onMove();
+					mMoveSpeed *= -1;
+					Stop();
+					return;
+				}
+			}
+			*pUnit++;
 
-		if ((mPos.x - mvTarget.x) * (mPos.x - mvTarget.x) < 100 && (mPos.y - mvTarget.y)*(mPos.y - mvTarget.y) < 100) {
+		}
+
+		if ((mvPos.x - mvTarget.x) * (mvPos.x - mvTarget.x) < 100 && (mvPos.y - mvTarget.y)*(mvPos.y - mvTarget.y) < 100) {
 			mUnitState = STOP;
 		}
 	}
@@ -44,8 +88,19 @@ void Unit::UnitProcess() {
 
 		break;
 	case COLLISION:
+	{
 
-		break;
+		DWORD curTime = Game::GetInstance()->GetTime();
+		if (curTime - mdwWaitTime > 400) {
+			if (++mCollisionCount > 2) {
+				Stop();
+			}
+			SetState(MOVE);
+			mdwWaitTime = curTime;
+		}
+
+	}
+	break;
 	}
 }
 
@@ -71,6 +126,10 @@ bool Unit::AddUnit(int i) {
 	case ULTRA:
 		mpUnitList[mUnitCount - 1] = new Ultra;
 		SendMessage(Game::GetInstance()->hList, LB_INSERTSTRING, 0, (LPARAM)L"울트라리스크를 생성했습니다.");
+		break;
+	case SARA:
+		mpUnitList[mUnitCount - 1] = new Sara;
+		SendMessage(Game::GetInstance()->hList, LB_INSERTSTRING, 0, (LPARAM)L"Sara를 생성했습니다.");
 		break;
 	}
 	return true;
@@ -106,9 +165,21 @@ void Unit::Release() {
 }
 
 void Unit::onChangeState() {
-	mRenderTarget = 0;
-
 	mdwAnimTime = Game::GetInstance()->GetTime();
 	mAnim = 0;
+
+}
+
+bool Unit::RemoveUnit() {
+	if (mUnitCount == 0) {
+		SendMessage(Game::GetInstance()->hList, LB_INSERTSTRING, 0, (LPARAM)L"삭제할 유닛이 없습니다.");
+		return false;
+	}
+	for (int i = 0; i < mUnitCount; i++) {
+		delete mpUnitList[i];
+	}
+	mUnitCount = 0;
+	SendMessage(Game::GetInstance()->hList, LB_INSERTSTRING, 0, (LPARAM)L"유닛을 삭제했습니다.");
+	return true;
 
 }

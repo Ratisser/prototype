@@ -26,6 +26,7 @@ private:
 	HDC *mhMarineDC;
 	HDC *mhZerglingDC;
 	HDC *mhUltraDC;
+	HDC *mhSaraDC;
 	HDC mhBackgroundDC;
 	
 

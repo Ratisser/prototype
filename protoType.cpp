@@ -40,7 +40,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
-
 	MSG msg;
 	HACCEL hAcc;
 	hAcc = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PROTOTYPE));
@@ -242,6 +241,12 @@ INT_PTR CALLBACK MenuDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case IDC_BUTTON3:
 			Unit::AddUnit(ULTRA);
+			break;
+		case IDC_BUTTON4:
+			Unit::RemoveUnit();
+			break;
+		case 1008:
+			Unit::AddUnit(SARA);
 			break;
 		}
 		break;

@@ -75,6 +75,7 @@ void Game::SceneInit()
 	mhMarineDC = new HDC[Marine::GetAllImageCount()];
 	mhZerglingDC = new HDC[Zergling::GetAllImageCount()];
 	mhUltraDC = new HDC[Ultra::GetAllImageCount()];
+	mhSaraDC = new HDC[Sara::GetAllImageCount()];
 
 	mGameState = GAME_INIT;
 }
@@ -169,6 +170,27 @@ void Game::SceneUpdate() {
 
 			ImageCount = (ImageCount + 1) % 17;
 		}
+		ImageCount = 0;
+		// sara
+		for (int i = 0; i < Sara::GetAllImageCount(); i++) {
+			wsprintf(mString, L"유닛 로딩중...(%d/%d)", i + 1, Sara::GetAllImageCount());
+			wsprintf(mFileName, L"unit\\sara\\img%d.bmp", i + 1);
+			Render();
+			if (ImageCount % 2 == 1 && i < Sara::GetUnitImageCount()) {
+				if ((mhSaraDC[i] = CreateReverseDC(mFileName)) == NULL) {
+					ErrorFileLoad();
+					return;
+				}
+			}
+			else {
+				if ((mhSaraDC[i] = CreateBitmapDC(mFileName)) == NULL) {
+					ErrorFileLoad();
+					return;
+				}
+			}
+
+			ImageCount = (ImageCount + 1) % 17;
+		}
 
 		//for (int i = 0; i < MAX_UNIT_COUNT; i++) {
 		//	mMousePoint.x = 100+(i%100)*5;
@@ -237,9 +259,9 @@ void Game::SceneRender() {
 		Unit** pUnit = Unit::GetUnitList();
 		for (int i = 0; i < Unit::GetUnitCount(); i++) {
 			VECTOR2 *point = (*pUnit)->GetPos();
-			int bitSize = (*pUnit)->GetBitmapSize();
-			int bitHalfSize = bitSize / 2;
-
+			Image *ImgInfo = (*pUnit)->GetImgInfo();
+			int halfWidth = ImgInfo->bitWidth / 2;
+			int halfHeight = ImgInfo->bitHeight / 2;
 			HDC *hImageArray;
 			int nRenderTarget;
 
@@ -254,9 +276,12 @@ void Game::SceneRender() {
 			case ULTRA:
 				hImageArray = mhUltraDC;
 				break;
+			case SARA:
+				hImageArray = mhSaraDC;
+				break;
 			}
 			int render = (*pUnit)->GetRenderTarget();
-			TransparentBlt(mhBackBuffer, point->x - bitHalfSize, point->y - bitHalfSize, bitSize, bitSize, hImageArray[render], 0, 0, bitSize, bitSize, RGB(0, 0, 0));
+			TransparentBlt(mhBackBuffer, point->x - halfWidth, point->y - halfHeight, ImgInfo->bitWidth, ImgInfo->bitHeight, hImageArray[render], 0, 0, ImgInfo->bitWidth, ImgInfo->bitHeight, ImgInfo->transColor);
 			*pUnit++; // 포인터로 탐색함
 		}
 
@@ -289,8 +314,12 @@ void Game::SceneRelease() {
 	for (int i = 0; i < Ultra::GetAllImageCount();i++) {
 		DeleteDC(mhUltraDC[i]);
 	}
+	for (int i = 0; i < Sara::GetAllImageCount();i++) {
+		DeleteDC(mhSaraDC[i]);
+	}
 	delete[] mhZerglingDC;
 	delete[] mhMarineDC;
 	delete[] mhUltraDC;
+	delete[] mhSaraDC;
 	Unit::Release();
 }

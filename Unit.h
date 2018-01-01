@@ -18,10 +18,14 @@ typedef enum _UnitState {
 }UnitState;
 
 typedef enum _UnitID {
-	MARINE, ZERGLING, ULTRA
+	MARINE, ZERGLING, ULTRA, SARA
 }UnitID;
 
-
+typedef struct _Image {
+	int bitWidth;
+	int bitHeight;
+	UINT transColor;
+}Image;
 
 class Unit
 {
@@ -32,6 +36,8 @@ private:
 	static Unit *mpUnitList[MAX_UNIT_COUNT];
 	static Unit *mpUnit;
 	static int mUnitCount;
+
+	int mCollisionCount;
 	
 	//-----------------------------------------
 	// Member variable
@@ -41,21 +47,22 @@ protected:
 	int mUnitSize; // Size be radius
 	int mRange; // Unit range must be radius
 
-	VECTOR2 mPos; // Unit Position
-	VECTOR2 mDirection; // Unit DirectionVector
-	VECTOR2 *mTarget; // Unit gaze at POINT 타겟인 유닛이 없을 경우 and 명령이 내려왔을 경우 변경
-	VECTOR2 mvTarget;
+	VECTOR2 mvPos; // Unit Position
+	VECTOR2 mvDirection; // Unit DirectionVector
+	VECTOR2 *mvFocusedTarget; // Unit gaze at POINT 타겟인 유닛이 없을 경우 and 명령이 내려왔을 경우 변경
+	VECTOR2 mvTarget; // move to
 	float mMoveSpeed; // Unit speed == 방향벡터에 곱할 값
 	int mDegree;
 
-
 	UnitID mUnitID;
-	int mBitmapSize;
 
 	DWORD mdwAnimTime;
+	DWORD mdwWaitTime;
 	int mAnim;
 	int mRenderTarget;
 	int *mSprite;
+
+	Image mUnitImage;
 
 	//-----------------------------------------
 	// Virtual function
@@ -80,6 +87,7 @@ public:
 
 	// make parent. get baby
 	static bool AddUnit(int i);
+	static bool RemoveUnit();
 
 	// command
 	void Stop();
@@ -93,22 +101,26 @@ public:
 	// Getter, Setter
 	//-----------------------------------------
 public:
-	inline void SetPos(VECTOR2 mouse) { mPos.x = mouse.x; mPos.y = mouse.y; }
-	inline void SetTargetVector(const VECTOR2 *vTarget) { mvTarget.x = vTarget->x;mvTarget.y = vTarget->y; }
-	inline VECTOR2 *GetPos() { return &mPos; }
-	inline VECTOR2 *GetDir() { return &mDirection; }
+	// inline function
+	inline void SetPos(VECTOR2 mouse) { mvPos.x = mouse.x; mvPos.y = mouse.y; }
+	inline void SetTargetVector(const VECTOR2 *vTarget) { mvTarget.x = vTarget->x; mvTarget.y = vTarget->y; }
+
+	inline VECTOR2 *GetPos() { return &mvPos; }
+	inline VECTOR2 *GetDir() { return &mvDirection; }
 	inline static Unit** GetUnitList() { return mpUnitList; }
 	inline static int GetUnitCount() { return mUnitCount; }
 	inline UnitID GetUnitID() { return mUnitID; }
 	inline UnitState GetState() { return mUnitState; }
 	inline int GetRenderTarget() { return mRenderTarget; }
-	inline void ChangeAnim() { mAnim++; }
+	inline Image *GetImgInfo() { return &mUnitImage; }
+	inline int GetUnitSize() { return mUnitSize; }
 
 
-	inline int GetBitmapSize() { return mBitmapSize; }
+	// non inline fuction
 
 	void SetState(UnitState state);
-	
+	void SetImg(int width, int height, UINT rgbColor);
+
 	//-----------------------------------------
 	// Constructor, Destructor
 	//-----------------------------------------

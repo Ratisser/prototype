@@ -52,6 +52,9 @@
     <Filter Include="소스 파일\-----WinMain-----\WinMain">
       <UniqueIdentifier>{cb71be12-831d-4d30-833e-07ad770fa5c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Sara">
+      <UniqueIdentifier>{18ffbd01-06dd-49c2-816f-12596d570cc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -90,6 +93,9 @@
     <ClInclude Include="Vector2.h">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
     </ClInclude>
+    <ClInclude Include="Sara.h">
+      <Filter>소스 파일\-----Unit-----\Sara</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="protoType.cpp">
@@ -121,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sara.cpp">
+      <Filter>소스 파일\-----Unit-----\Sara</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

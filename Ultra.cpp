@@ -10,8 +10,9 @@ Ultra::Ultra()
 	:Unit()
 {
 	mUnitID = ULTRA;
-	mBitmapSize = 128;
-	mMoveSpeed = 9.0f;
+	mMoveSpeed = 8.0f;
+	mUnitSize = 35;
+	SetImg(128, 128, RGB(0,0,0));
 }
 
 
@@ -25,8 +26,8 @@ void Ultra::onStop() {
 }
 
 void Ultra::onMove() {
-	mPos.x += mDirection.x * mMoveSpeed;
-	mPos.y += mDirection.y * mMoveSpeed;
+	mvPos.x += mvDirection.x * mMoveSpeed;
+	mvPos.y += mvDirection.y * mMoveSpeed;
 	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * msprMove[mAnim] - (mDegree == 9);
 	mAnim++;
 	mAnim = mAnim % 9;
