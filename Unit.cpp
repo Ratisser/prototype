@@ -58,8 +58,8 @@ void Unit::UnitProcess() {
 			curUnitSize = (*pUnit)->GetUnitSize();
 			curUnitSize = curUnitSize * curUnitSize;
 			distance = curUnitSize + unitSize;
-			if ((mvPos.x - point->x) * (mvPos.x - point->x) < distance && (mvPos.y - point->y)*(mvPos.y - point->y) < distance) {
-				if ((*pUnit)->GetState() != STOP) {
+			if (Vec2Dist(&mvPos, point)< distance) {
+				if ((*pUnit)->GetState() == MOVE || (*pUnit)->GetState() == COLLISION) {
 					mMoveSpeed *= -1;
 					onMove();
 					mMoveSpeed *= -1;
@@ -79,7 +79,7 @@ void Unit::UnitProcess() {
 
 		}
 
-		if ((mvPos.x - mvTarget.x) * (mvPos.x - mvTarget.x) < 100 && (mvPos.y - mvTarget.y)*(mvPos.y - mvTarget.y) < 100) {
+		if (Vec2Dist(&mvPos,&mvTarget) < 100) {
 			mUnitState = STOP;
 		}
 	}
@@ -91,9 +91,10 @@ void Unit::UnitProcess() {
 	{
 
 		DWORD curTime = Game::GetInstance()->GetTime();
-		if (curTime - mdwWaitTime > 400) {
-			if (++mCollisionCount > 2) {
+		if (curTime - mdwWaitTime > 500) {
+			if (++mCollisionCount > 5) {
 				Stop();
+				break;
 			}
 			SetState(MOVE);
 			mdwWaitTime = curTime;

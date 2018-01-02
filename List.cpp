@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "List.h"
 
-List::List()
+LinkedList::LinkedList()
 {
 	mHeadNode = nullptr;
 	mTailNode = nullptr;
@@ -10,12 +10,12 @@ List::List()
 }
 
 
-List::~List()
+LinkedList::~LinkedList()
 {
 
 }
 
-void List::AddData(int data)
+void LinkedList::AddData(int data)
 {
 	if (mHeadNode == nullptr)
 	{
@@ -35,7 +35,7 @@ void List::AddData(int data)
 	}
 }
 
-bool List::DeleteData(int data)
+bool LinkedList::DeleteData(int data)
 {
 	if (mHeadNode == nullptr) return false;
 	UnitNode *prevNode = mTailNode;
@@ -55,7 +55,7 @@ bool List::DeleteData(int data)
 
 }
 
-void List::DeleteAll() {
+void LinkedList::DeleteAll() {
 	if (mHeadNode == nullptr) return;
 	UnitNode *currentNode = mHeadNode;
 	UnitNode *deleteNode = currentNode;
@@ -70,7 +70,7 @@ void List::DeleteAll() {
 	mCurrentNode = nullptr;
 }
 
-int List::PeekNode() {
+int LinkedList::PeekNode() {
 	int returnVar;
 	if (mHeadNode == nullptr)
 	{

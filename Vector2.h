@@ -7,7 +7,7 @@
 typedef struct _VECTOR2 {
 	float x;
 	float y;
-}VECTOR2;
+}VECTOR2, *PVECTOR2;
 
 
 
@@ -21,6 +21,11 @@ __forceinline float Vec2DotProduct(const VECTOR2 *pV) {
 
 __forceinline float Vec2Theta(const VECTOR2 *pV) {
 	return (float)(((pV->x <0) ? TORAD(360.0f) : 0.0f) + (acos(-pV->y) * ((pV->x < 0) ? -1 : 1)));
+}
+
+// 루트를 씌우지 않았음
+__forceinline float Vec2Dist(const VECTOR2 *pV1, const VECTOR2 *pV2) {
+	return (pV1->x - pV2->x) * (pV1->x - pV2->x) + (pV1->y - pV2->y) * (pV1->y - pV2->y);
 }
 
 void Vec2Dir(VECTOR2 *pOut, const VECTOR2 *pV1, const VECTOR2 *pV2);

@@ -18,7 +18,12 @@ protected:
 	HDC mhdc;
 	RECT mClientRect;
 	VECTOR2 mMousePoint;
+	VECTOR2 mMouseSP;
+	VECTOR2 mMouseEP;
+	RECT mDragRect;
+	int mDrag;
 	eMouseState mMouseState;
+	
 
 	int mnFPS;
 	int mnFPSCount;

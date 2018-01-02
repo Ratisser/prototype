@@ -1,5 +1,6 @@
 #pragma once
 #include "GameFrame.h"
+#include "Unit.h"
 
 // 실질적인 게임처리는 여기서
 
@@ -17,7 +18,7 @@ private:
 
 	TCHAR mFPS[50];
 	TCHAR mUnitCount[50];
-	TCHAR mString[50];
+	TCHAR mSystemMsg[50];
 	TCHAR mFileName[50];
 
 	//--------------------
@@ -29,6 +30,8 @@ private:
 	HDC *mhSaraDC;
 	HDC mhBackgroundDC;
 	
+	Unit *mSelectedUnit[12];
+	int mSelectedCount;
 
 protected:
 	virtual void SceneInit();

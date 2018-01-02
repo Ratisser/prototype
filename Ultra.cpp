@@ -11,7 +11,7 @@ Ultra::Ultra()
 {
 	mUnitID = ULTRA;
 	mMoveSpeed = 8.0f;
-	mUnitSize = 35;
+	mUnitSize = 40;
 	SetImg(128, 128, RGB(0,0,0));
 }
 

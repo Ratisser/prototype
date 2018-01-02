@@ -40,7 +40,11 @@ void GameFrame::Init(HWND hWnd) {
 	hdc = GetDC(mhWnd);
 	hBit = CreateCompatibleBitmap(hdc, CLIENT_WIDTH, CLIENT_HEIGHT);
 	mhBackBuffer = CreateCompatibleDC(hdc);
-	SelectObject(mhBackBuffer,hBit);
+	HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	HPEN pen = CreatePen(PS_SOLID, 2, RGB(15, 230, 15));
+	SelectObject(mhBackBuffer, brush);
+	SelectObject(mhBackBuffer, pen);
+	SelectObject(mhBackBuffer, hBit);
 	DeleteObject(hBit);
 
 
@@ -70,19 +74,20 @@ void GameFrame::Render() {
 		mnFPS = mnFPSCount;
 		mnFPSCount = 0;
 	}
-	else {
-		HDC hdc = GetDC(mhWnd);
+	HDC hdc = GetDC(mhWnd);
 
-		PatBlt(mhBackBuffer, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, BLACKNESS);
+	PatBlt(mhBackBuffer, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, BLACKNESS);
 
-		SceneRender();
-
-		BitBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, mhBackBuffer, 0, 0, SRCCOPY);
-
-		ReleaseDC(mhWnd, hdc);
-		mdwOldRenderTime = mdwCurRenderTime;
-		mnFPSCount++;
+	SceneRender();
+	if (mDrag) {
+		Rectangle(mhBackBuffer, mMouseSP.x, mMouseSP.y, mMouseEP.x, mMouseEP.y);
 	}
+
+	BitBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, mhBackBuffer, 0, 0, SRCCOPY);
+
+	ReleaseDC(mhWnd, hdc);
+	mdwOldRenderTime = mdwCurRenderTime;
+	mnFPSCount++;
 }
 
 void GameFrame::MouseProcess(UINT msg, LPARAM lParam) {
@@ -90,14 +95,20 @@ void GameFrame::MouseProcess(UINT msg, LPARAM lParam) {
 	{
 	case WM_LBUTTONDOWN:
 		mMouseState = LBUTTONDOWN;
-		mMousePoint.x = LOWORD(lParam);
-		mMousePoint.y = HIWORD(lParam);
+		mMousePoint.x = mMouseSP.x = mMouseEP.x = LOWORD(lParam);
+		mMousePoint.y = mMouseSP.y = mMouseEP.y = HIWORD(lParam);
+		mDrag = 1;
 		break;
 
 	case WM_LBUTTONUP:
 		mMouseState = LBUTTONUP;
-		mMousePoint.x = LOWORD(lParam);
-		mMousePoint.y = HIWORD(lParam);
+		mMousePoint.x = mMouseEP.x = LOWORD(lParam);
+		mMousePoint.y = mMouseEP.y = HIWORD(lParam);
+		mDragRect.left = (LONG)(mMouseSP.x < mMouseEP.x ? mMouseSP.x : mMouseEP.x);
+		mDragRect.right = (LONG)(mMouseSP.x > mMouseEP.x ? mMouseSP.x : mMouseEP.x);
+		mDragRect.top= (LONG)(mMouseSP.y < mMouseEP.y ? mMouseSP.y : mMouseEP.y);
+		mDragRect.bottom = (LONG)(mMouseSP.y > mMouseEP.y ? mMouseSP.y : mMouseEP.y);
+		mDrag = 0;
 		break;
 	case WM_RBUTTONDOWN:
 		mMouseState = RBUTTONDOWN;
@@ -110,6 +121,11 @@ void GameFrame::MouseProcess(UINT msg, LPARAM lParam) {
 		mMousePoint.y = HIWORD(lParam);
 		break;
 	case WM_MOUSEMOVE:
+		if (mDrag)
+		{
+			mMouseEP.x = LOWORD(lParam);
+			mMouseEP.y = HIWORD(lParam);
+		}
 		break;
 	default:
 		mMouseState = MOUSE_NONE;

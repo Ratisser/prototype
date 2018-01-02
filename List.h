@@ -5,7 +5,7 @@ typedef struct _UnitNode {
 	_UnitNode *nextNode;
 }UnitNode;
 
-class List
+class LinkedList
 {
 private:
 	UnitNode *mHeadNode;
@@ -23,6 +23,6 @@ public:
 
 
 public:
-	List();
-	~List();
+	LinkedList();
+	~LinkedList();
 };

@@ -12,7 +12,7 @@ Zergling::Zergling()
 {
 	mUnitID = ZERGLING;
 	mMoveSpeed = 10.0f;
-	mUnitSize = 12;
+	mUnitSize = 14;
 	SetImg(128, 128, RGB(0, 0, 0));
 }
 
