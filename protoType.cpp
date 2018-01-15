@@ -245,7 +245,7 @@ INT_PTR CALLBACK MenuDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		case IDC_BUTTON4:
 			Unit::RemoveUnit();
 			break;
-		case 1008:
+		case IDC_BUTTON5:
 			Unit::AddUnit(SARA);
 			break;
 		}

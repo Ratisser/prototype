@@ -1,5 +1,5 @@
 #pragma once
-#include "GameFrame.h"
+#include "GameFramework.h"
 #include "Unit.h"
 
 // 실질적인 게임처리는 여기서
@@ -9,13 +9,15 @@ typedef enum {
 }eGameState;
 
 class Game :
-	public GameFrame
+	public GameFramework
 {
 private:
+	// 시간과 상태
 	DWORD mOldTime;
 	DWORD mCurrentTime;
 	eGameState mGameState;
 
+	// 사용할 문자열들
 	TCHAR mFPS[50];
 	TCHAR mUnitCount[50];
 	TCHAR mSystemMsg[50];
@@ -43,6 +45,7 @@ public:
 	__forceinline DWORD GetTime() { return mCurrentTime; }
 
 	void ErrorFileLoad();
+	void ClearSelectedUnit();
 
 	HDC CreateBitmapDC(LPCWSTR filename);
 	HDC CreateReverseDC(LPCWSTR filename);

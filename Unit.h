@@ -9,7 +9,7 @@
 
 #pragma once
 #include "Vector2.h"
-#include "GameFrame.h"
+#include "GameFramework.h"
 
 #define MAX_UNIT_COUNT 100
 
@@ -22,9 +22,9 @@ typedef enum _UnitID {
 }UnitID;
 
 typedef struct _Image {
-	int bitWidth;
-	int bitHeight;
-	UINT transColor;
+	int			bitWidth;
+	int			bitHeight;
+	UINT		transColor;
 }Image;
 
 class Unit
@@ -33,36 +33,37 @@ class Unit
 	// Static variable 
 	//-----------------------------------------
 private:
-	static Unit *mpUnitList[MAX_UNIT_COUNT];
-	static Unit *mpUnit;
-	static int mUnitCount;
-
-	int mCollisionCount;
+	static Unit		*mpUnitList[MAX_UNIT_COUNT];
+	static Unit		*mpUnit;
+	static int		mUnitCount;
 	
 	//-----------------------------------------
 	// Member variable
 	//-----------------------------------------
 protected:
-	UnitState mUnitState; // Unit State
-	int mUnitSize; // Size be radius
-	int mRange; // Unit range must be radius
+	// Unit Attribute
+	UnitState		mUnitState;		// Unit State
+	UnitID			mUnitID;
+	int				mUnitSize;		// Size. radius
+	int				mSight;			// Unit sight. radius
+	int				mAtkRange;		// Unit Attack Range. radius
 
-	VECTOR2 mvPos; // Unit Position
-	VECTOR2 mvDirection; // Unit DirectionVector
-	VECTOR2 *mvFocusedTarget; // Unit gaze at POINT 타겟인 유닛이 없을 경우 and 명령이 내려왔을 경우 변경
-	VECTOR2 mvTarget; // move to
-	float mMoveSpeed; // Unit speed == 방향벡터에 곱할 값
-	int mDegree;
+	// Unit Position
+	VECTOR2			mvPos;			// Unit Position
+	VECTOR2			mvDirection;	// Unit DirectionVector
+	VECTOR2			mvTarget;		// to move
+	float			mMoveSpeed;
+	int				mCollisionCount;
+	int				mDegree;
 
-	UnitID mUnitID;
+	// Unit Image & Sprite
+	int				mAnim;
+	int				mRenderTarget;
+	Image			mUnitImage;
 
-	DWORD mdwAnimTime;
-	DWORD mdwWaitTime;
-	int mAnim;
-	int mRenderTarget;
-	int *mSprite;
-
-	Image mUnitImage;
+	// Timer
+	DWORD			mdwAnimTime;
+	DWORD			mdwWaitTime;
 
 	//-----------------------------------------
 	// Virtual function
@@ -85,7 +86,7 @@ public:
 	// standard unit process
 	void UnitProcess();
 
-	// make parent. get baby
+	// get baby
 	static bool AddUnit(int i);
 	static bool RemoveUnit();
 
@@ -102,8 +103,8 @@ public:
 	//-----------------------------------------
 public:
 	// inline function
-	inline void SetPos(VECTOR2 mouse) { mvPos.x = mouse.x; mvPos.y = mouse.y; }
-	inline void SetTargetVector(const VECTOR2 *vTarget) { mvTarget.x = vTarget->x; mvTarget.y = vTarget->y; }
+	inline void	SetPos(VECTOR2 mouse) { mvPos.x = mouse.x; mvPos.y = mouse.y; }
+	inline void	SetTargetVector(const VECTOR2 *vTarget)	{ mvTarget.x = vTarget->x; mvTarget.y = vTarget->y; }
 
 	inline VECTOR2 *GetPos() { return &mvPos; }
 	inline VECTOR2 *GetDir() { return &mvDirection; }
@@ -116,8 +117,7 @@ public:
 	inline int GetUnitSize() { return mUnitSize; }
 
 
-	// non inline fuction
-
+	// non-inline fuction
 	void SetState(UnitState state);
 	void SetImg(int width, int height, UINT rgbColor);
 

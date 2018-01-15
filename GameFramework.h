@@ -8,7 +8,7 @@ typedef enum {
 	LBUTTONDOWN, LBUTTONUP, RBUTTONDOWN, RBUTTONUP, MOUSE_NONE
 }eMouseState;
 
-class GameFrame
+class GameFramework
 {
 private:
 	void fullScreenModeChange();
@@ -40,7 +40,7 @@ protected:
 	virtual void SceneRelease() {}
 
 public:
-	__forceinline static GameFrame *GetInstance() { static GameFrame singleton; return &singleton; }
+	__forceinline static GameFramework *GetInstance() { static GameFramework singleton; return &singleton; }
 	void ChangeScreenMode(BOOL bIsFullMode);
 
 	void MouseProcess(UINT msg, LPARAM lParam);

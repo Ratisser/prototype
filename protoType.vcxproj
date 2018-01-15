@@ -151,7 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameFrame.h" />
+    <ClInclude Include="GameFramework.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Marine.h" />
     <ClInclude Include="resource.h" />
@@ -164,8 +164,10 @@
     <ClInclude Include="Zergling.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameFrame.cpp" />
+    <ClCompile Include="GameInitiate.cpp" />
+    <ClCompile Include="GameFramework.cpp" />
+    <ClCompile Include="SceneRender.cpp" />
+    <ClCompile Include="SceneUpdate.cpp" />
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Marine.cpp" />
     <ClCompile Include="protoType.cpp" />

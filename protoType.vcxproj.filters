@@ -72,9 +72,6 @@
     <ClInclude Include="Game.h">
       <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClInclude>
-    <ClInclude Include="GameFrame.h">
-      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
-    </ClInclude>
     <ClInclude Include="List.h">
       <Filter>소스 파일\-----Util-----\List</Filter>
     </ClInclude>
@@ -96,6 +93,9 @@
     <ClInclude Include="Sara.h">
       <Filter>소스 파일\-----Unit-----\Sara</Filter>
     </ClInclude>
+    <ClInclude Include="GameFramework.h">
+      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="protoType.cpp">
@@ -103,12 +103,6 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일\-----WinMain-----\WinMain</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>소스 파일\-----Game-----\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="GameFrame.cpp">
-      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
     </ClCompile>
     <ClCompile Include="List.cpp">
       <Filter>소스 파일\-----Util-----\List</Filter>
@@ -130,6 +124,18 @@
     </ClCompile>
     <ClCompile Include="Sara.cpp">
       <Filter>소스 파일\-----Unit-----\Sara</Filter>
+    </ClCompile>
+    <ClCompile Include="GameFramework.cpp">
+      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRender.cpp">
+      <Filter>소스 파일\-----Game-----\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneUpdate.cpp">
+      <Filter>소스 파일\-----Game-----\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameInitiate.cpp">
+      <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

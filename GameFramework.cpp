@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "GameFrame.h"
+#include "GameFramework.h"
 
-void GameFrame::fullScreenModeChange()
+void GameFramework::fullScreenModeChange()
 {
 	DEVMODE sDevMode;
 	sDevMode.dmSize = sizeof(DEVMODE);
@@ -11,7 +11,7 @@ void GameFrame::fullScreenModeChange()
 	ChangeDisplaySettings(&sDevMode, CDS_FULLSCREEN);
 }
 
-void GameFrame::ChangeScreenMode(BOOL bIsFullMode)
+void GameFramework::ChangeScreenMode(BOOL bIsFullMode)
 {
 	RECT rect;
 	mbFullScreen = bIsFullMode;
@@ -32,7 +32,7 @@ void GameFrame::ChangeScreenMode(BOOL bIsFullMode)
 	}
 }
 
-void GameFrame::Init(HWND hWnd) {
+void GameFramework::Init(HWND hWnd) {
 	HDC hdc;
 	HBITMAP hBit;
 
@@ -61,11 +61,11 @@ void GameFrame::Init(HWND hWnd) {
 
 }
 
-void GameFrame::Update() {
+void GameFramework::Update() {
 	SceneUpdate();
 }
 
-void GameFrame::Render() {
+void GameFramework::Render() {
 	mdwCurrentTime = GetTickCount();
 	mdwCurRenderTime = GetTickCount();
 	if (mdwCurrentTime - mdwOldTime >= 1000)
@@ -90,7 +90,7 @@ void GameFrame::Render() {
 	mnFPSCount++;
 }
 
-void GameFrame::MouseProcess(UINT msg, LPARAM lParam) {
+void GameFramework::MouseProcess(UINT msg, LPARAM lParam) {
 	switch (msg)
 	{
 	case WM_LBUTTONDOWN:
@@ -133,7 +133,7 @@ void GameFrame::MouseProcess(UINT msg, LPARAM lParam) {
 	}
 }
 
-void GameFrame::Release() {
+void GameFramework::Release() {
 
 	SceneRelease();
 
