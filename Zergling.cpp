@@ -1,17 +1,14 @@
 #include "stdafx.h"
 #include "Zergling.h"
 
-
-const int Zergling::TOTAL_IMAGE_COUNT = 296;
-const int Zergling::UNIT_IMAGE_COUNT = 289;
 int Zergling::msprStop[] = { 0 };
 int Zergling::msprMove[] = { 4,5,6,7,8,9,10,11};
 
 Zergling::Zergling()
-	:Unit()
+	:StarUnit()
 {
 	mUnitID = ZERGLING;
-	mMoveSpeed = 10.0f;
+	mMoveSpeed = 9.0f;
 	mUnitSize = 14;
 	SetImg(128, 128, RGB(0, 0, 0));
 }

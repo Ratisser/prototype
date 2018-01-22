@@ -141,7 +141,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		// 클라이언트영역의 크기를 맞추는 부분
 		RECT rtWnd;
 
-		Game::GetInstance()->Init(hWnd);
+		Game::GetInstance()->Init(hInst, hWnd);
 
 		GetWindowRect(hWnd, &rtWnd);
 		ghMenu = CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, MenuDlg);
@@ -234,20 +234,22 @@ INT_PTR CALLBACK MenuDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		switch (LOWORD(wParam))
 		{
 		case IDC_BUTTON1:
-			Unit::AddUnit(MARINE);
+			StarUnit::AddUnit(MARINE);
 			break;
 		case IDC_BUTTON2:
-			Unit::AddUnit(ZERGLING);
+			StarUnit::AddUnit(ZERGLING);
 			break;
 		case IDC_BUTTON3:
-			Unit::AddUnit(ULTRA);
+			StarUnit::AddUnit(ULTRA);
 			break;
 		case IDC_BUTTON4:
-			Unit::RemoveUnit();
+			StarUnit::RemoveUnit();
 			break;
 		case IDC_BUTTON5:
-			Unit::AddUnit(SARA);
+			StarUnit::AddUnit(SARA);
 			break;
+		case IDC_BUTTON6:
+			StarUnit::AddUnit(GHOST);
 		}
 		break;
 	}

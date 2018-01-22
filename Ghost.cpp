@@ -1,33 +1,34 @@
 #include "stdafx.h"
-#include "Sara.h"
+#include "Ghost.h"
 
-int Sara::msprStop[] = { 0 };
-int Sara::msprMove[] = { 1,1,1,1,1,2,2,2,2,2 };
+int Ghost::msprStop[] = { 3 };
+int Ghost::msprMove[] = { 3,4,5,6,7,8,9,10,11 };
 
-Sara::Sara()
+Ghost::Ghost()
 	:StarUnit()
 {
-	mUnitID = SARA;
+	mUnitID = GHOST;
 	mMoveSpeed = 5.0f;
-	mUnitSize = 31;
-	SetImg(43, 62, RGB(255, 255, 255));
+	mUnitSize = 17;
+	SetImg(64, 64, RGB(0, 0, 0));
 }
 
 
-Sara::~Sara()
+Ghost::~Ghost()
 {
 }
 
-void Sara::onStop() {
+
+void Ghost::onStop() {
 	mAnim = 0;
 	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * msprStop[mAnim] - (mDegree == 9);
 }
 
-void Sara::onMove() {
+void Ghost::onMove() {
 	mvPos.x += mvDirection.x * mMoveSpeed;
 	mvPos.y += mvDirection.y * mMoveSpeed;
 	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * msprMove[mAnim] - (mDegree == 9);
 	mAnim++;
-	mAnim = mAnim % 10;
+	mAnim = mAnim % 8;
 
 }

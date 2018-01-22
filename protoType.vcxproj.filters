@@ -55,6 +55,9 @@
     <Filter Include="소스 파일\-----Unit-----\Sara">
       <UniqueIdentifier>{18ffbd01-06dd-49c2-816f-12596d570cc6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Ghost">
+      <UniqueIdentifier>{dde2f69b-709b-4987-bf8c-086498ca8e6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -84,9 +87,6 @@
     <ClInclude Include="Ultra.h">
       <Filter>소스 파일\-----Unit-----\Ultra</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
     </ClInclude>
@@ -95,6 +95,15 @@
     </ClInclude>
     <ClInclude Include="GameFramework.h">
       <Filter>소스 파일\-----Game-----\GameFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="StarUnit.h">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,9 +125,6 @@
     <ClCompile Include="Ultra.cpp">
       <Filter>소스 파일\-----Unit-----\Ultra</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
     </ClCompile>
@@ -134,8 +140,23 @@
     <ClCompile Include="SceneUpdate.cpp">
       <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClCompile>
-    <ClCompile Include="GameInitiate.cpp">
+    <ClCompile Include="SceneInit.cpp">
       <Filter>소스 파일\-----Game-----\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRelease.cpp">
+      <Filter>소스 파일\-----Game-----\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>소스 파일\-----Game-----\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="StartUnit.cpp">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,11 @@
-#include "Marine.h"
 #include "stdafx.h"
+#include "Marine.h"
 
-
-const int Marine::TOTAL_IMAGE_COUNT = 229;
-const int Marine::UNIT_IMAGE_COUNT = 221;
 int Marine::msprStop[] = { 0 };
 int Marine::msprMove[] = { 4,5,6,7,8,9,10,11,12};
 
 Marine::Marine()
-	:Unit()
+	:StarUnit()
 {
 	mUnitID = MARINE;
 	mMoveSpeed = 5.0f;

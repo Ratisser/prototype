@@ -13,14 +13,15 @@ class GameFramework
 private:
 	void fullScreenModeChange();
 protected:
+	HINSTANCE mhInst;
 	HWND mhWnd;
 	HDC mhBackBuffer;
 	HDC mhdc;
 	RECT mClientRect;
+	RECT mDragRect;
 	VECTOR2 mMousePoint;
 	VECTOR2 mMouseSP;
 	VECTOR2 mMouseEP;
-	RECT mDragRect;
 	int mDrag;
 	eMouseState mMouseState;
 	
@@ -48,7 +49,7 @@ public:
 
 
 public:
-	void Init(HWND hWnd);
+	void Init(HINSTANCE hInst, HWND hWnd);
 	void Update();
 	void Render();
 	void Release();

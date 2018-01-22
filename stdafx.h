@@ -27,10 +27,11 @@
 #include "Game.h"
 #include "List.h"
 
-#include "Unit.h"
+#include "StarUnit.h"
 #include "Marine.h"
 #include "Zergling.h"
 #include "Ultra.h"
 #include "Sara.h"
+#include "Ghost.h"
 #include "Vector2.h"
 

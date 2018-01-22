@@ -3,11 +3,9 @@
 
 
 class Zergling :
-	public Unit
+	public StarUnit
 {
 private:
-	static const int UNIT_IMAGE_COUNT;
-	static const int TOTAL_IMAGE_COUNT;
 	static int msprStop[];
 	static int msprMove[];
 
@@ -15,8 +13,11 @@ protected:
 	virtual void onStop();
 	virtual void onMove();
 public:
-	inline static int GetAllImageCount() { return TOTAL_IMAGE_COUNT; }
-	inline static int GetUnitImageCount() { return UNIT_IMAGE_COUNT; }
+	virtual int GetFilePath() { return IDS_ZERGLING_PATH; }
+	virtual int GetAllImageCount() { return 296; }
+	virtual int GetUnitImageCount() { return 289; }
+
+	virtual StarUnit *GetInstance() { return new Zergling; }
 
 	Zergling();
 	~Zergling();

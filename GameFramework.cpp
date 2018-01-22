@@ -32,10 +32,11 @@ void GameFramework::ChangeScreenMode(BOOL bIsFullMode)
 	}
 }
 
-void GameFramework::Init(HWND hWnd) {
+void GameFramework::Init(HINSTANCE hInst, HWND hWnd) {
 	HDC hdc;
 	HBITMAP hBit;
 
+	mhInst = hInst;
 	mhWnd = hWnd;
 	hdc = GetDC(mhWnd);
 	hBit = CreateCompatibleBitmap(hdc, CLIENT_WIDTH, CLIENT_HEIGHT);

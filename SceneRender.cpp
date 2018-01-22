@@ -17,14 +17,18 @@ void Game::SceneRender() {
 		break;
 	case GAME_ROOP:
 	{
-		Unit** pUnit;
+		HDC hRender;
+		StarUnit** pUnit;
 		VECTOR2 *point;
 		Image *ImgInfo;
 		int halfWidth;
 		int halfHeight;
 
+		hRender = CreateCompatibleDC(mhBackBuffer);
+
 		// 배경 그리기
-		BitBlt(mhBackBuffer, 0, 0, 800, 600, mhBackgroundDC, 0, 0, SRCCOPY);
+		SelectObject(hRender, mhBackgroundBit);
+		BitBlt(mhBackBuffer, 0, 0, 800, 600, hRender, 0, 0, SRCCOPY);
 
 		//------------------------------
 		// 선택된 유닛 원 그리기
@@ -46,31 +50,16 @@ void Game::SceneRender() {
 		//------------------------------
 		// 유닛 그리기
 		//------------------------------
-		pUnit = Unit::GetUnitList();
-		for (int i = 0; i < Unit::GetUnitCount(); i++) {
+		pUnit = StarUnit::GetUnitList();
+		for (int i = 0; i < StarUnit::GetUnitCount(); i++) {
 			point = (*pUnit)->GetPos();
 			ImgInfo = (*pUnit)->GetImgInfo();
 			halfWidth = ImgInfo->bitWidth / 2;
 			halfHeight = ImgInfo->bitHeight / 2;
-			HDC *hImageArray;
 
-			switch ((*pUnit)->GetUnitID())
-			{
-			case MARINE:
-				hImageArray = mhMarineDC;
-				break;
-			case ZERGLING:
-				hImageArray = mhZerglingDC;
-				break;
-			case ULTRA:
-				hImageArray = mhUltraDC;
-				break;
-			case SARA:
-				hImageArray = mhSaraDC;
-				break;
-			}
-			int render = (*pUnit)->GetRenderTarget();
-			TransparentBlt(mhBackBuffer, point->x - halfWidth, point->y - halfHeight, ImgInfo->bitWidth, ImgInfo->bitHeight, hImageArray[render], 0, 0, ImgInfo->bitWidth, ImgInfo->bitHeight, ImgInfo->transColor);
+			int renderIndex = (*pUnit)->GetRenderTarget();
+			SelectObject(hRender, *(*(mhBit + (*pUnit)->GetUnitID())+renderIndex));
+			TransparentBlt(mhBackBuffer, point->x - halfWidth, point->y - halfHeight, ImgInfo->bitWidth, ImgInfo->bitHeight, hRender, 0, 0, ImgInfo->bitWidth, ImgInfo->bitHeight, ImgInfo->transColor);
 			*pUnit++; // 포인터로 탐색함
 		}
 
@@ -79,11 +68,13 @@ void Game::SceneRender() {
 		_stprintf(mFPS, _T("FPS:%-4d"), mnFPS);
 		TextOut(mhBackBuffer, 0, 0, mFPS, _tcslen(mFPS));
 
-		_stprintf(mUnitCount, _T("UnitCount:%-4d, mX: %-4.2f, mY: %-4.2f"), Unit::GetUnitCount(), mMousePoint.x, mMousePoint.y);
+		_stprintf(mUnitCount, _T("UnitCount:%-4d, mX: %-4.2f, mY: %-4.2f"), StarUnit::GetUnitCount(), mMousePoint.x, mMousePoint.y);
 		TextOut(mhBackBuffer, 0, 20, mUnitCount, _tcslen(mUnitCount));
 
 		_stprintf(mSystemMsg, _T("선택중인 유닛 : %d"), mSelectedCount);
 		TextOut(mhBackBuffer, 0, 40, mSystemMsg, _tcslen(mSystemMsg));
+
+		DeleteDC(hRender);
 
 		break;
 	}

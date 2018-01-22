@@ -1,17 +1,15 @@
 #include "stdafx.h"
 #include "Ultra.h"
 
-const int Ultra::TOTAL_IMAGE_COUNT = 265;
-const int Ultra::UNIT_IMAGE_COUNT = 255;
 int Ultra::msprStop[] = { 0 };
 int Ultra::msprMove[] = { 0,1,2,3,4,5,6,7,8 };
 
 Ultra::Ultra()
-	:Unit()
+	:StarUnit()
 {
 	mUnitID = ULTRA;
 	mMoveSpeed = 8.0f;
-	mUnitSize = 50;
+	mUnitSize = 44;
 	SetImg(128, 128, RGB(0,0,0));
 }
 

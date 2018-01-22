@@ -12,10 +12,10 @@ void Game::SceneUpdate() {
 	{
 		mOldTime = mCurrentTime;
 		mSelectedCount = 0;
+		int ImageCount = 0;
 
 		// 이 카운트는 이미지를 반대로 그릴지 말지 결정 17마다 초기화
 		// 왜 그런지는 모르겠으나 그림이 17방향을 유도하게 짜여져있음...(A*알고리즘에 의한 이동이 8방향에서 확장된 16방향으로 추정)
-		int ImageCount = 0;
 
 		//-----------------------------------
 		// 배경 이미지 로드
@@ -23,7 +23,7 @@ void Game::SceneUpdate() {
 		wsprintf(mSystemMsg, L"배경 로딩중...");
 		SceneRender();
 		wsprintf(mFileName, L"map\\map_01.bmp");
-		if ((mhBackgroundDC = CreateBitmapDC(mFileName)) == NULL) {
+		if ((mhBackgroundBit = CreateBitmapDC(mFileName)) == NULL) {
 			ErrorFileLoad();
 			return;
 		}
@@ -32,95 +32,31 @@ void Game::SceneUpdate() {
 		// 유닛 이미지 정보 로드
 		//-----------------------------------------
 
-		// 마린 로드
-		for (int i = 0; i < Marine::GetAllImageCount(); i++) {
-			wsprintf(mSystemMsg, L"유닛 로딩중...(%d/%d)", i + 1, Marine::GetAllImageCount());
-			wsprintf(mFileName, L"unit\\marine\\img%d.bmp", i + 1);
-			Render();
-			if (ImageCount % 2 == 1 && i < Marine::GetUnitImageCount()) {
-				if ((mhMarineDC[i] = CreateReverseDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
+		for (int i = 0; i < MAX_UNIT_SPECIES; i++) {
+			LoadString(mhInst, mpParents[i]->GetFilePath(), mFilePath, 50);
+			*(mhBit + i) = new HBITMAP[mpParents[i]->GetAllImageCount()];
+			for (int j = 0; j < mpParents[i]->GetAllImageCount(); j++) {
+				wsprintf(mSystemMsg, L"유닛 로딩중...(%d/%d)", j + 1, mpParents[i]->GetAllImageCount());
+				wsprintf(mFileName, L"%simg%d.bmp", mFilePath, j + 1);
+				Render();
+				if (ImageCount % 2 == 1 && j < mpParents[i]->GetUnitImageCount()) {
+					if ((*(*(mhBit + i) + j) = CreateReverseDC(mFileName)) == NULL) {
+						ErrorFileLoad();
+						return;
+					}
 				}
-			}
-			else {
-				if ((mhMarineDC[i] = CreateBitmapDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
+				else {
+					if ((*(*(mhBit + i) + j) = CreateBitmapDC(mFileName)) == NULL) {
+						ErrorFileLoad();
+						return;
+					}
 				}
-			}
 
-			ImageCount = (ImageCount + 1) % 17;
-		}
-		ImageCount = 0;
-		// 저글링 로드
-		for (int i = 0; i < Zergling::GetAllImageCount(); i++) {
-			wsprintf(mSystemMsg, L"유닛 로딩중...(%d/%d)", i + 1, Zergling::GetAllImageCount());
-			wsprintf(mFileName, L"unit\\zergling\\img%d.bmp", i + 1);
-			Render();
-			if (ImageCount % 2 == 1 && i < Zergling::GetUnitImageCount()) {
-				if ((mhZerglingDC[i] = CreateReverseDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
-				}
+				ImageCount = (ImageCount + 1) % 17;
 			}
-			else {
-				if ((mhZerglingDC[i] = CreateBitmapDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
-				}
-			}
-
-			ImageCount = (ImageCount + 1) % 17;
-		}
-		ImageCount = 0;
-		// 울트라리스크 로드
-		for (int i = 0; i < Ultra::GetAllImageCount(); i++) {
-			wsprintf(mSystemMsg, L"유닛 로딩중...(%d/%d)", i + 1, Ultra::GetAllImageCount());
-			wsprintf(mFileName, L"unit\\ultra\\img%d.bmp", i + 1);
-			Render();
-			if (ImageCount % 2 == 1 && i < Ultra::GetUnitImageCount()) {
-				if ((mhUltraDC[i] = CreateReverseDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
-				}
-			}
-			else {
-				if ((mhUltraDC[i] = CreateBitmapDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
-				}
-			}
-
-			ImageCount = (ImageCount + 1) % 17;
-		}
-		ImageCount = 0;
-		// sara
-		for (int i = 0; i < Sara::GetAllImageCount(); i++) {
-			wsprintf(mSystemMsg, L"유닛 로딩중...(%d/%d)", i + 1, Sara::GetAllImageCount());
-			wsprintf(mFileName, L"unit\\sara\\img%d.bmp", i + 1);
-			Render();
-			if (ImageCount % 2 == 1 && i < Sara::GetUnitImageCount()) {
-				if ((mhSaraDC[i] = CreateReverseDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
-				}
-			}
-			else {
-				if ((mhSaraDC[i] = CreateBitmapDC(mFileName)) == NULL) {
-					ErrorFileLoad();
-					return;
-				}
-			}
-
-			ImageCount = (ImageCount + 1) % 17;
+			ImageCount = 0;
 		}
 
-		//for (int i = 0; i < MAX_UNIT_COUNT; i++) {
-		//	mMousePoint.x = 100+(i%100)*5;
-		//	mMousePoint.y = 100+(i/100)*10;
-		//	Unit::AddUnit(ULTRA);
-		//}
 		mCurrentTime = GetTickCount();
 		wsprintf(mSystemMsg, L"로딩에 걸린 시간 : %d ms", mCurrentTime - mOldTime);
 		Render();
@@ -141,13 +77,13 @@ void Game::SceneUpdate() {
 	case GAME_ROOP:
 	{
 		mOldTime = mCurrentTime;
-		Unit** pUnit;
+		StarUnit** pUnit;
 		VECTOR2 *point;
 
 		// 유닛의 행동 실행
-		if (Unit::GetUnitCount() > 0) {
-			pUnit = Unit::GetUnitList();
-			for (int i = 0; i < Unit::GetUnitCount(); i++) {
+		if (StarUnit::GetUnitCount() > 0) {
+			pUnit = StarUnit::GetUnitList();
+			for (int i = 0; i < StarUnit::GetUnitCount(); i++) {
 				(*pUnit)->UnitProcess();
 				*pUnit++;
 			}
@@ -155,12 +91,12 @@ void Game::SceneUpdate() {
 
 		// 유닛의 선택
 		if (mMouseState == LBUTTONUP) {
-			if (Unit::GetUnitCount() > 0) {
+			if (StarUnit::GetUnitCount() > 0) {
 				// 드래그 선택
 				mSelectedCount = 0;
 				int unitSize;
-				pUnit = Unit::GetUnitList();
-				for (int i = 0; i < Unit::GetUnitCount(); i++) {
+				pUnit = StarUnit::GetUnitList();
+				for (int i = 0; i < StarUnit::GetUnitCount(); i++) {
 					if (mSelectedCount >= 12) break;
 					point = (*pUnit)->GetPos();
 					unitSize = (*pUnit)->GetUnitSize();
