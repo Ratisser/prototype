@@ -6,7 +6,7 @@
 #pragma warning(disable:4996)
 #pragma comment(lib, "msimg32.lib")
 
-#define MAX_UNIT_SPECIES 5
+#define MAX_UNIT_SPECIES 4
 
 typedef enum {
 	GAME_INIT, GAME_TITLE, GAME_ROOP, GAME_DESTROY
@@ -39,13 +39,13 @@ private:
 	TCHAR mFilePath[50];
 
 	//--------------------
-	// 이미지 저장할 DC 핸들
+	// 이미지 저장할 핸들
 	//--------------------
 	HBITMAP **mhBit;
 	HBITMAP mhBackgroundBit;
 	
 	StarUnit *mSelectedUnit[12];
-	int mSelectedCount;
+	int mSelectedUnitCount;
 
 protected:
 	virtual void SceneInit();

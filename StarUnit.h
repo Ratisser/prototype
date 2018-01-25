@@ -14,13 +14,13 @@
 
 #define MAX_UNIT_COUNT 100
 
-typedef enum _UnitState {
+typedef enum _eUnitState {
 	STOP,WATCH, MOVE, ATTACK, COLLISION
-}UnitState;
+}eUnitState;
 
-typedef enum _UnitID {
-	MARINE, ZERGLING, ULTRA, SARA, GHOST
-}UnitID;
+typedef enum _eUnitID {
+	MARINE, ZERGLING, ULTRA, GHOST
+}eUnitID;
 
 typedef struct _Image {
 	int	bitWidth;
@@ -36,28 +36,32 @@ class StarUnit
 private:
 	static StarUnit		*mpUnitList[MAX_UNIT_COUNT];
 	static StarUnit		*mpUnit;
-	static int		mUnitCount;
+	static int			mUnitCount;
 
 	//-----------------------------------------
 	// Member variable
 	//-----------------------------------------
 protected:
 	// Unit Attribute
-	UnitState		mUnitState;		// Unit State
-	UnitID			mUnitID;
+	eUnitState		mUnitState;		// Unit State
+	eUnitID			mUnitID;
+	int				mAlliance;		// number?
 	int				mUnitSize;		// Size. radius
 	int				mSight;			// Unit sight. radius
 	int				mAtkRange;		// Unit Attack Range. radius
 
 	// Unit Position
 	VECTOR2			mvPos;			// Unit Position
-	VECTOR2			mvDirection;	// Unit DirectionVector
+	VECTOR2			mvDirection;	// Unit DirectionVector(normalized vector)
 	VECTOR2			mvTarget;		// to move
 	float			mMoveSpeed;
 	int				mCollisionCount;
 	int				mDegree;
 
 	// Unit Image & Sprite
+	int				*mStopSpr;
+	int				*mMoveSpr;
+	int				mMoveSprCount;
 	int				mAnim;
 	int				mRenderTarget;
 	Image			mUnitImage;
@@ -70,6 +74,9 @@ protected:
 	// Static function 
 	//-----------------------------------------
 public:
+	static void Release();
+	static bool AddUnit(int i);
+	static bool RemoveUnit();
 
 	//-----------------------------------------
 	// Member function
@@ -77,13 +84,12 @@ public:
 protected:
 	void checkRange(); // check unit range
 	void onChangeState();
+	void onStop();
+	void onMove();
 
 	//-----------------------------------------
 	// Virtual function
 	//-----------------------------------------
-protected:
-	virtual void onStop() {};
-	virtual void onMove() = 0;
 public:
 	virtual int GetFilePath() = 0;
 	virtual int GetAllImageCount() = 0;
@@ -97,17 +103,12 @@ public:
 	// standard unit process
 	void UnitProcess();
 
-	// get baby
-	static bool AddUnit(int i);
-	static bool RemoveUnit();
-
 	// command
 	void Stop();
 	void Move();
 	void Attack();
 	void Focus();
 
-	static void Release();
 
 	//-----------------------------------------
 	// Getter, Setter
@@ -121,15 +122,15 @@ public:
 	inline void	SetTargetVector(const VECTOR2 *vTarget)	{ mvTarget.x = vTarget->x; mvTarget.y = vTarget->y; }
 	inline VECTOR2 *GetPos() { return &mvPos; }
 	inline VECTOR2 *GetDir() { return &mvDirection; }
-	inline UnitID GetUnitID() { return mUnitID; }
-	inline UnitState GetState() { return mUnitState; }
+	inline eUnitID GetUnitID() { return mUnitID; }
+	inline eUnitState GetState() { return mUnitState; }
 	inline int GetRenderTarget() { return mRenderTarget; }
 	inline int GetUnitSize() { return mUnitSize; }
 	inline Image *GetImgInfo() { return &mUnitImage; }
 
 
 	// non-inline fuction
-	void SetState(UnitState state);
+	void SetState(eUnitState state);
 	void SetImg(int width, int height, UINT rgbColor);
 
 	//-----------------------------------------

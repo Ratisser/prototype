@@ -20,7 +20,7 @@ void StarUnit::SetImg(int width, int height, UINT rgbColor) {
 }
 
 void StarUnit::UnitProcess() {
-	checkRange();
+	
 
 	Vec2Dir(&mvDirection, &mvPos, &mvTarget);
 	mDegree = TODEG(Vec2Theta(&mvDirection)) / 20;
@@ -33,13 +33,14 @@ void StarUnit::UnitProcess() {
 		SetState(WATCH);
 		break;
 	case WATCH:
+		checkRange();
 
 		break;
 	case MOVE:
 	{
-
+		// TODO : 애니메이션과 상태업데이트를 분리할 것(나중을 위해서)
 		DWORD curTime = Game::GetInstance()->GetTime();
-		if ((curTime - mdwAnimTime) > 50) {
+		if ((curTime - mdwAnimTime) > 33) {
 			onMove();
 			mdwAnimTime = curTime;
 		}
@@ -49,7 +50,8 @@ void StarUnit::UnitProcess() {
 		int unitSize = mUnitSize * mUnitSize;
 		int curUnitSize;
 		int distance;
-		for (int i = 0; i < StarUnit::GetUnitCount(); i++) {
+		int nUnitCount = StarUnit::GetUnitCount();
+		for (int i = 0; i < nUnitCount; i++) {
 			if ((*pUnit) == this) {
 				*pUnit++;
 				continue;
@@ -106,7 +108,7 @@ void StarUnit::UnitProcess() {
 }
 
 void StarUnit::checkRange() {
-
+	int nUnitCount = StarUnit::GetUnitCount();
 }
 
 bool StarUnit::AddUnit(int i) {
@@ -137,6 +139,20 @@ bool StarUnit::AddUnit(int i) {
 	return true;
 }
 
+void StarUnit::onStop() {
+	mAnim = 0;
+	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * mStopSpr[mAnim] - (mDegree == 9);
+}
+
+void StarUnit::onMove() {
+	mvPos.x += mvDirection.x * mMoveSpeed;
+	mvPos.y += mvDirection.y * mMoveSpeed;
+	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * mMoveSpr[mAnim] - (mDegree == 9);
+	mAnim++;
+	mAnim = mAnim % mMoveSprCount;
+
+}
+
 void StarUnit::Stop() {
 	if (mUnitState != STOP) {
 		SetState(STOP);
@@ -153,7 +169,7 @@ void StarUnit::Move() {
 
 
 
-void StarUnit::SetState(UnitState state) {
+void StarUnit::SetState(eUnitState state) {
 	mUnitState = state;
 }
 

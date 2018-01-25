@@ -8,9 +8,13 @@ Marine::Marine()
 	:StarUnit()
 {
 	mUnitID = MARINE;
-	mMoveSpeed = 5.0f;
+	mAlliance = 1;
+	mMoveSpeed = 4.0f;
 	mUnitSize = 17;
 	SetImg(64, 64, RGB(0, 0, 0));
+	mStopSpr = msprStop;
+	mMoveSpr = msprMove;
+	mMoveSprCount = 8;
 }
 
 
@@ -18,17 +22,3 @@ Marine::~Marine()
 {
 }
 
-
-void Marine::onStop() {
-	mAnim = 0;
-	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * msprStop[mAnim] - (mDegree == 9);
-}
-
-void Marine::onMove() {
-	mvPos.x += mvDirection.x * mMoveSpeed;
-	mvPos.y += mvDirection.y * mMoveSpeed;
-	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * msprMove[mAnim] - (mDegree == 9);
-	mAnim++;
-	mAnim = mAnim % 8;
-
-}

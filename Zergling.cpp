@@ -8,9 +8,13 @@ Zergling::Zergling()
 	:StarUnit()
 {
 	mUnitID = ZERGLING;
-	mMoveSpeed = 9.0f;
+	mAlliance = 2;
+	mMoveSpeed = 8.0f;
 	mUnitSize = 14;
 	SetImg(128, 128, RGB(0, 0, 0));
+	mStopSpr = msprStop;
+	mMoveSpr = msprMove;
+	mMoveSprCount = 8;
 }
 
 
@@ -18,16 +22,3 @@ Zergling::~Zergling()
 {
 }
 
-void Zergling::onStop() {
-	mAnim = 0;
-	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + (17 * msprStop[mAnim]) - (mDegree == 9);
-}
-
-void Zergling::onMove() {
-	mvPos.x += mvDirection.x * mMoveSpeed;
-	mvPos.y += mvDirection.y * mMoveSpeed;
-	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + (17 * msprMove[mAnim]) - (mDegree == 9);
-	mAnim++;
-	mAnim = mAnim % 8;
-
-}

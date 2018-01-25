@@ -245,9 +245,6 @@ INT_PTR CALLBACK MenuDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		case IDC_BUTTON4:
 			StarUnit::RemoveUnit();
 			break;
-		case IDC_BUTTON5:
-			StarUnit::AddUnit(SARA);
-			break;
 		case IDC_BUTTON6:
 			StarUnit::AddUnit(GHOST);
 		}

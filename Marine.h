@@ -8,9 +8,6 @@ private:
 	static int				msprStop[];
 	static int				msprMove[];
 
-protected:
-	virtual void onStop();
-	virtual void onMove();
 public:
 	virtual int GetFilePath() { return IDS_MARINE_PATH; }
 	virtual int GetAllImageCount() { return 229; }

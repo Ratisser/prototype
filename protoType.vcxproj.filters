@@ -90,9 +90,6 @@
     <ClInclude Include="Vector2.h">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
     </ClInclude>
-    <ClInclude Include="Sara.h">
-      <Filter>소스 파일\-----Unit-----\Sara</Filter>
-    </ClInclude>
     <ClInclude Include="GameFramework.h">
       <Filter>소스 파일\-----Game-----\GameFrame</Filter>
     </ClInclude>
@@ -128,9 +125,6 @@
     <ClCompile Include="Vector2.cpp">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
     </ClCompile>
-    <ClCompile Include="Sara.cpp">
-      <Filter>소스 파일\-----Unit-----\Sara</Filter>
-    </ClCompile>
     <ClCompile Include="GameFramework.cpp">
       <Filter>소스 파일\-----Game-----\GameFrame</Filter>
     </ClCompile>
@@ -149,14 +143,14 @@
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClCompile>
-    <ClCompile Include="StartUnit.cpp">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
-    </ClCompile>
     <ClCompile Include="Unit.cpp">
       <Filter>소스 파일\-----Unit-----\Unit</Filter>
     </ClCompile>
     <ClCompile Include="Ghost.cpp">
       <Filter>소스 파일\-----Unit-----\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="StarUnit.cpp">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

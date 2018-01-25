@@ -156,7 +156,6 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Marine.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Sara.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Ultra.h" />
@@ -176,7 +175,6 @@
     <ClCompile Include="List.cpp" />
     <ClCompile Include="Marine.cpp" />
     <ClCompile Include="protoType.cpp" />
-    <ClCompile Include="Sara.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -184,7 +182,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Ultra.cpp" />
-    <ClCompile Include="StartUnit.cpp" />
+    <ClCompile Include="StarUnit.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Zergling.cpp" />

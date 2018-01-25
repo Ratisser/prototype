@@ -16,5 +16,8 @@ void Game::SceneInit()
 	//mhUltraBit =	new	HBITMAP[mParents[2]->GetAllImageCount()];
 	//mhSaraBit =		new	HBITMAP[mParents[3]->GetAllImageCount()];
 	mhBit = new HBITMAP*[MAX_UNIT_SPECIES];
+	for (int i = 0; i < MAX_UNIT_SPECIES; i++) {
+		*(mhBit + i) = nullptr;
+	}
 	mGameState = GAME_INIT;
 }
