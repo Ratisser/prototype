@@ -1,7 +1,8 @@
 #include "stdafx.h"
+#include "Game.h"
 
 void Game::SceneRelease() {
-	Unit::Release();
+	StarUnit::Release();
 	DeleteObject(mhBackgroundBit);
 	int count;
 

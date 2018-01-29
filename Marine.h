@@ -1,10 +1,8 @@
-#ifndef _MARINE_H_
-#define _MARINE_H_
-
+#pragma once
 #include "Unit.h"
 
 class Marine :
-	public Unit
+	public StarUnit
 {
 private:
 	static int				msprStop[];
@@ -15,10 +13,8 @@ public:
 	virtual int GetAllImageCount() { return 229; }
 	virtual int GetUnitImageCount() { return 221; }
 
-	virtual Unit *GetInstance() { return new Marine; }
+	virtual StarUnit *GetInstance() { return new Marine; }
 
 	Marine();
 	~Marine();
 };
-
-#endif

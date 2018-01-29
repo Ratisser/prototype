@@ -16,6 +16,9 @@
     <Filter Include="소스 파일\-----Util-----">
       <UniqueIdentifier>{7c9b74e3-1f28-4748-bbd7-48c3b9d2b6ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\-----Util-----\List">
+      <UniqueIdentifier>{e65bfe11-c38c-4aed-8568-d054586ca633}</UniqueIdentifier>
+    </Filter>
     <Filter Include="소스 파일\-----Util-----\Vector2D">
       <UniqueIdentifier>{105a395c-0a06-421c-a6cd-511fae761ec8}</UniqueIdentifier>
     </Filter>
@@ -37,6 +40,9 @@
     <Filter Include="소스 파일\-----Unit-----\Marine">
       <UniqueIdentifier>{838a3fe9-db8f-4a45-b001-bb02ec9d4a98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Ultra">
+      <UniqueIdentifier>{72b4be1a-6d7c-4d94-a2bc-ab22210887d3}</UniqueIdentifier>
+    </Filter>
     <Filter Include="소스 파일\-----Unit-----\Zergling">
       <UniqueIdentifier>{8afad05b-c243-4ea6-a353-353492d01e76}</UniqueIdentifier>
     </Filter>
@@ -46,11 +52,11 @@
     <Filter Include="소스 파일\-----WinMain-----\WinMain">
       <UniqueIdentifier>{cb71be12-831d-4d30-833e-07ad770fa5c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\-----Unit-----\Sara">
+      <UniqueIdentifier>{18ffbd01-06dd-49c2-816f-12596d570cc6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="소스 파일\-----Unit-----\Ghost">
       <UniqueIdentifier>{dde2f69b-709b-4987-bf8c-086498ca8e6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\-----Unit-----\Ultra">
-      <UniqueIdentifier>{72b4be1a-6d7c-4d94-a2bc-ab22210887d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +75,9 @@
     <ClInclude Include="Game.h">
       <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>소스 파일\-----Util-----\List</Filter>
+    </ClInclude>
     <ClInclude Include="Marine.h">
       <Filter>소스 파일\-----Unit-----\Marine</Filter>
     </ClInclude>
@@ -84,14 +93,14 @@
     <ClInclude Include="GameFramework.h">
       <Filter>소스 파일\-----Game-----\GameFrame</Filter>
     </ClInclude>
-    <ClInclude Include="Ghost.h">
-      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
+    <ClInclude Include="StarUnit.h">
+      <Filter>소스 파일\-----Unit-----\Unit</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
       <Filter>소스 파일\-----Unit-----\Unit</Filter>
     </ClInclude>
-    <ClInclude Include="List.h">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    <ClInclude Include="Ghost.h">
+      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +109,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일\-----WinMain-----\WinMain</Filter>
+    </ClCompile>
+    <ClCompile Include="List.cpp">
+      <Filter>소스 파일\-----Util-----\List</Filter>
     </ClCompile>
     <ClCompile Include="Marine.cpp">
       <Filter>소스 파일\-----Unit-----\Marine</Filter>
@@ -131,13 +143,13 @@
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Ghost.cpp">
-      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
-    </ClCompile>
     <ClCompile Include="Unit.cpp">
       <Filter>소스 파일\-----Unit-----\Unit</Filter>
     </ClCompile>
-    <ClCompile Include="List.cpp">
+    <ClCompile Include="Ghost.cpp">
+      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
+    </ClCompile>
+    <ClCompile Include="StarUnit.cpp">
       <Filter>소스 파일\-----Unit-----\Unit</Filter>
     </ClCompile>
   </ItemGroup>

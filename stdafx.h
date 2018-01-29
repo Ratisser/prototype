@@ -3,8 +3,7 @@
 // 들어 있는 포함 파일입니다.
 //
 
-#ifndef _STDAFX_H_
-#define _STDAFX_H_
+#pragma once
 
 #include "targetver.h"
 
@@ -29,10 +28,10 @@
 #include "List.h"
 #include "Vector2.h"
 
-#include "Unit.h"
+#include "StarUnit.h"	
 #include "Marine.h"
 #include "Zergling.h"
 #include "Ultra.h"
 #include "Ghost.h"
 
-#endif
+

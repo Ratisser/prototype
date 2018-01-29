@@ -1,7 +1,4 @@
-#ifndef _GAME_FRAME_WORK_H_
-#define _GAME_FRAME_WORK_H_
-
-
+#pragma once
 #include "Vector2.h"
 #define CLIENT_WIDTH 800
 #define CLIENT_HEIGHT 600
@@ -60,5 +57,3 @@ public:
 
 
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef _VECTOR2_H_
-#define _VECTOR2_H_
+#pragma once
 
 #define PI 3.141592
 #define TODEG(a) a/(2*PI)*360
@@ -34,5 +33,3 @@ void Vec2Dir(VECTOR2 *pOut, const VECTOR2 *pV1, const VECTOR2 *pV2);
 //void Vec2Nomalize(VECTOR2 *pOut, const VECTOR2 *pV) {
 //	float vLen = pV->x*pV->x
 //}
-
-#endif

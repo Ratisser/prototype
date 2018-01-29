@@ -12,6 +12,7 @@
 #define IDS_ULTRA_PATH                  105
 #define IDS_ZERGLING_PATH               106
 #define IDI_PROTOTYPE                   107
+#define IDS_SARA_PATH                   107
 #define IDI_SMALL                       108
 #define IDS_GHOST_PATH                  108
 #define IDC_PROTOTYPE                   109

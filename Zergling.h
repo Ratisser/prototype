@@ -1,11 +1,9 @@
-#ifndef _ZERGLING_H_
-#define _ZERGLING_H_
-
+#pragma once
 #include "Unit.h"
 
 
 class Zergling :
-	public Unit
+	public StarUnit
 {
 private:
 	static int msprStop[];
@@ -16,10 +14,8 @@ public:
 	virtual int GetAllImageCount() { return 296; }
 	virtual int GetUnitImageCount() { return 289; }
 
-	virtual Unit *GetInstance() { return new Zergling; }
+	virtual StarUnit *GetInstance() { return new Zergling; }
 
 	Zergling();
 	~Zergling();
 };
-
-#endif

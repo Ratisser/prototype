@@ -1,10 +1,11 @@
 #include "stdafx.h"
+#include "Ghost.h"
 
 int Ghost::msprStop[] = { 3 };
 int Ghost::msprMove[] = { 3,4,5,6,7,8,9,10,11 };
 
 Ghost::Ghost()
-	:Unit()
+	:StarUnit()
 {
 	mUnitID = GHOST;
 	mAlliance = 1;

@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "stdafx.h"
+#include "Game.h"
 
 
 //-----------------------------------------------

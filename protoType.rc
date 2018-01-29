@@ -85,12 +85,13 @@ BEGIN
     PUSHBUTTON      "마린 생성",IDC_BUTTON1,38,34,50,14
     PUSHBUTTON      "저글링 생성",IDC_BUTTON2,38,57,50,14
     PUSHBUTTON      "울트라 생성",IDC_BUTTON3,38,80,50,14
-    PUSHBUTTON      "삭제",IDC_BUTTON4,39,126,50,14
+    PUSHBUTTON      "Sara",IDC_BUTTON5,38,103,50,14
+    PUSHBUTTON      "삭제",IDC_BUTTON4,38,144,50,14
     DEFPUSHBUTTON   "확인",IDOK,198,155,50,14
     PUSHBUTTON      "취소",IDCANCEL,252,155,50,14
     LTEXT           "상태창 :",IDC_STATIC,118,17,28,8
     LISTBOX         IDC_LIST1,118,31,174,111,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
-    PUSHBUTTON      "고스트",IDC_BUTTON6,38,104,50,14
+    PUSHBUTTON      "고스트",IDC_BUTTON6,37,124,50,14
 END
 
 
@@ -163,6 +164,7 @@ BEGIN
     IDS_MARINE_PATH         "unit\\marine\\"
     IDS_ULTRA_PATH          "unit\\ultra\\"
     IDS_ZERGLING_PATH       "unit\\zergling\\"
+    IDS_SARA_PATH           "unit\\sara\\"
     IDS_GHOST_PATH          "unit\\ghost\\"
     IDC_PROTOTYPE           "PROTOTYPE"
 END
