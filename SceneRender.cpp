@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Game.h"
 
 //-----------------------------------------------
 // 실제 화면에 보이는 장면을 처리합니다
@@ -18,7 +17,7 @@ void Game::SceneRender() {
 	case GAME_ROOP:
 	{
 		HDC hRender;
-		StarUnit** pUnit;
+		Unit** pUnit;
 		VECTOR2 *point;
 		Image *pImgInfo;
 		int halfWidth;
@@ -50,8 +49,8 @@ void Game::SceneRender() {
 		//------------------------------
 		// 유닛 그리기
 		//------------------------------
-		pUnit = StarUnit::GetUnitList();
-		for (int i = 0; i < StarUnit::GetUnitCount(); i++) {
+		pUnit = Unit::GetUnitList();
+		for (int i = 0; i < Unit::GetUnitCount(); i++) {
 			point = (*pUnit)->GetPos();
 			pImgInfo = (*pUnit)->GetImgInfo();
 			halfWidth = pImgInfo->bitWidth / 2;
@@ -73,7 +72,7 @@ void Game::SceneRender() {
 		_stprintf(mFPS, _T("FPS:%-4d"), mnFPS);
 		TextOut(mhBackBuffer, 0, 0, mFPS, _tcslen(mFPS));
 
-		_stprintf(mUnitCount, _T("UnitCount:%-4d, mX: %-4.2f, mY: %-4.2f"), StarUnit::GetUnitCount(), mMousePoint.x, mMousePoint.y);
+		_stprintf(mUnitCount, _T("UnitCount:%-4d, mX: %-4.2f, mY: %-4.2f"), Unit::GetUnitCount(), mMousePoint.x, mMousePoint.y);
 		TextOut(mhBackBuffer, 0, 20, mUnitCount, _tcslen(mUnitCount));
 
 		_stprintf(mSystemMsg, _T("선택중인 유닛 : %d"), mSelectedUnitCount);

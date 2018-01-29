@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Game.h"
 
 //-----------------------------------------------
 // 게임에 필요한 정보를 업데이트 합니다.
@@ -83,15 +82,15 @@ void Game::SceneUpdate() {
 	case GAME_ROOP:
 	{
 		mOldTime = mCurrentTime;
-		StarUnit** pUnit;
+		Unit **ppUnit;
 		VECTOR2 *point;
 
 		// 유닛의 행동 실행
-		if (StarUnit::GetUnitCount() > 0) {
-			pUnit = StarUnit::GetUnitList();
-			for (int i = 0; i < StarUnit::GetUnitCount(); i++) {
-				(*pUnit)->UnitProcess();
-				*pUnit++;
+		if (Unit::GetUnitCount() > 0) {
+			ppUnit = Unit::GetUnitList();
+			for (int i = 0; i < Unit::GetUnitCount(); i++) {
+				(*ppUnit)->UnitProcess();
+				*ppUnit++;
 			}
 		}
 
@@ -99,15 +98,15 @@ void Game::SceneUpdate() {
 
 		// 유닛의 선택
 		if (mMouseState == LBUTTONUP) {
-			if (StarUnit::GetUnitCount() > 0) {
+			if (Unit::GetUnitCount() > 0) {
 				// 드래그 선택
 				mSelectedUnitCount = 0;
 				int unitSize;
-				pUnit = StarUnit::GetUnitList();
-				for (int i = 0; i < StarUnit::GetUnitCount(); i++) {
+				ppUnit = Unit::GetUnitList();
+				for (int i = 0; i < Unit::GetUnitCount(); i++) {
 					if (mSelectedUnitCount >= 12) break;
-					point = (*pUnit)->GetPos();
-					unitSize = (*pUnit)->GetUnitSize();
+					point = (*ppUnit)->GetPos();
+					unitSize = (*ppUnit)->GetUnitSize();
 					if ((point->x > mDragRect.left && point->x < mDragRect.right && point->y > mDragRect.top && point->y < mDragRect.bottom)
 						|| Vec2Dist(&mMouseEP, point) < unitSize*unitSize) {
 						if (mSelectedUnitCount == 0) {
@@ -115,10 +114,10 @@ void Game::SceneUpdate() {
 								mSelectedUnit[i] = nullptr;
 							}
 						}
-						mSelectedUnit[mSelectedUnitCount] = *pUnit;
+						mSelectedUnit[mSelectedUnitCount] = *ppUnit;
 						mSelectedUnitCount++;
 					}
-					*pUnit++;
+					*ppUnit++;
 				}
 			}
 			int count = 0;
@@ -130,16 +129,16 @@ void Game::SceneUpdate() {
 
 		// 유닛 이동명령
 		if (mMouseState == RBUTTONDOWN) {
-			pUnit = mSelectedUnit;
+			ppUnit = mSelectedUnit;
 			for (int i = 0; i < 12; i++) {
-				if (*pUnit == nullptr) {
+				if (*ppUnit == nullptr) {
 					break;
 				}
 				else {
-					(*pUnit)->SetTargetVector(&mMousePoint);
-					(*pUnit)->Move();
+					(*ppUnit)->SetTargetVector(&mMousePoint);
+					(*ppUnit)->Move();
 				}
-				*pUnit++;
+				*ppUnit++;
 			}
 		}
 

@@ -1,6 +1,8 @@
-#pragma once
+#ifndef _GAME_H_
+#define _GAME_H_
+
 #include "GameFramework.h"
-#include "StarUnit.h"
+#include "Unit.h"
 #include "Vector2.h"
 
 #pragma warning(disable:4996)
@@ -20,7 +22,7 @@ class Game :
 	// Static variable 
 	//-----------------------------------------
 public:
-	static StarUnit *mpParents[];
+	static Unit *mpParents[];
 
 	//-----------------------------------------
 	// member variable 
@@ -44,7 +46,7 @@ private:
 	HBITMAP **mhBit;
 	HBITMAP mhBackgroundBit;
 	
-	StarUnit *mSelectedUnit[12];
+	Unit *mSelectedUnit[12];
 	int mSelectedUnitCount;
 
 protected:
@@ -69,3 +71,4 @@ public:
 	~Game();
 };
 
+#endif
