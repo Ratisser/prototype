@@ -1,11 +1,10 @@
 #include "stdafx.h"
-#include "Ultra.h"
 
 int Ultra::msprStop[] = { 0 };
 int Ultra::msprMove[] = { 0,1,2,3,4,5,6,7,8 };
 
 Ultra::Ultra()
-	:StarUnit()
+	:Unit()
 {
 	mUnitID = ULTRA;
 	mAlliance = 2;

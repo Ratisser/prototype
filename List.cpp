@@ -1,7 +1,7 @@
 #include "stdafx.h"
-#include "List.h"
 
-LinkedList::LinkedList()
+
+List::List()
 {
 	mHeadNode = nullptr;
 	mTailNode = nullptr;
@@ -10,79 +10,81 @@ LinkedList::LinkedList()
 }
 
 
-LinkedList::~LinkedList()
+List::~List()
 {
 
 }
 
-void LinkedList::AddData(int data)
+void List::AddData(Unit *pUnit)
 {
 	if (mHeadNode == nullptr)
 	{
 		mHeadNode = new UnitNode;
-		mHeadNode->nextNode = mHeadNode;
-		mHeadNode->data = data;
+		mHeadNode->pNextNode = mHeadNode;
+		mHeadNode->pUnit = pUnit;
 		mTailNode = mHeadNode;
 		mCount++;
 	}
 	else
 	{
-		mTailNode->nextNode = new UnitNode;
-		mTailNode = mTailNode->nextNode;
-		mTailNode->nextNode = mHeadNode;
-		mTailNode->data = data;
+		mTailNode->pNextNode = new UnitNode;
+		mTailNode = mTailNode->pNextNode;
+		mTailNode->pNextNode = mHeadNode;
+		mTailNode->pUnit = pUnit;
 		mCount++;
 	}
 }
 
-bool LinkedList::DeleteData(int data)
+bool List::DeleteData(Unit *pUnit)
 {
 	if (mHeadNode == nullptr) return false;
 	UnitNode *prevNode = mTailNode;
 	UnitNode *currentNode = mHeadNode;
 	do {
-		if (currentNode->data == data) {
-			prevNode->nextNode = currentNode->nextNode;
+		if (currentNode->pUnit == pUnit) {
+			prevNode->pNextNode = currentNode->pNextNode;
 			delete currentNode;
+			mCount--;
 			return true;
 		}
 		else {
-			currentNode = currentNode->nextNode;
-			prevNode = prevNode->nextNode;
+			currentNode = currentNode->pNextNode;
+			prevNode = prevNode->pNextNode;
 		}
 	} while (currentNode != mHeadNode);
 	return false;
 
 }
 
-void LinkedList::DeleteAll() {
+void List::DeleteAll() {
 	if (mHeadNode == nullptr) return;
 	UnitNode *currentNode = mHeadNode;
 	UnitNode *deleteNode = currentNode;
 
 	for (int i = 0; i < mCount; i++) {
-		currentNode = currentNode->nextNode;
+		currentNode = currentNode->pNextNode;
 		delete deleteNode;
 		deleteNode = currentNode;
 	}
 	mHeadNode = nullptr;
 	mTailNode = nullptr;
 	mCurrentNode = nullptr;
+	mCount = 0;
 }
 
-int LinkedList::PeekNode() {
-	int returnVar;
+Unit *List::PeekNode() {
+	Unit *returnVar;
 	if (mHeadNode == nullptr)
 	{
-		return -1;
+		return nullptr;
 	}
 	else
 	{
 		if (mCurrentNode == nullptr) {
 			mCurrentNode = mHeadNode;
 		}
-		returnVar = mCurrentNode->data;
-		mCurrentNode = mCurrentNode->nextNode;
+		returnVar = mCurrentNode->pUnit;
+		mCurrentNode = mCurrentNode->pNextNode;
 	}
 	return returnVar;
 }

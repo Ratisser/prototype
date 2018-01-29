@@ -234,19 +234,19 @@ INT_PTR CALLBACK MenuDlg(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 		switch (LOWORD(wParam))
 		{
 		case IDC_BUTTON1:
-			StarUnit::AddUnit(MARINE);
+			Unit::AddUnit(MARINE);
 			break;
 		case IDC_BUTTON2:
-			StarUnit::AddUnit(ZERGLING);
+			Unit::AddUnit(ZERGLING);
 			break;
 		case IDC_BUTTON3:
-			StarUnit::AddUnit(ULTRA);
+			Unit::AddUnit(ULTRA);
 			break;
 		case IDC_BUTTON4:
-			StarUnit::RemoveUnit();
+			Unit::RemoveUnit();
 			break;
 		case IDC_BUTTON6:
-			StarUnit::AddUnit(GHOST);
+			Unit::AddUnit(GHOST);
 		}
 		break;
 	}

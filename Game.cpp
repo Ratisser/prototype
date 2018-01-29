@@ -5,7 +5,7 @@
 // 이 부모 인스턴스의 배열번호는 UnitID의 번호와 같아야함.
 // 
 //----------------------------------------------------
-StarUnit *Game::mpParents[MAX_UNIT_SPECIES] = { new Marine, new Zergling, new Ultra, new Ghost };
+Unit *Game::mpParents[MAX_UNIT_SPECIES] = { new Marine, new Zergling, new Ultra, new Ghost };
 
 Game::Game()
 {

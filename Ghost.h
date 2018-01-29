@@ -1,7 +1,10 @@
-#pragma once
-#include "StarUnit.h"
+#ifndef _GHOST_H_
+#define _GHOST_H_
+
+#include "Unit.h"
+
 class Ghost :
-	public StarUnit
+	public Unit
 {
 private:
 	static int				msprStop[];
@@ -12,9 +15,10 @@ public:
 	virtual int GetAllImageCount() { return 229; }
 	virtual int GetUnitImageCount() { return 221; }
 
-	virtual StarUnit *GetInstance() { return new Ghost; }
+	virtual Unit *GetInstance() { return new Ghost; }
 
 	Ghost();
 	~Ghost();
 };
 
+#endif

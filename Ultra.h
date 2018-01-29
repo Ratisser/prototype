@@ -1,8 +1,10 @@
-#pragma once
+#ifndef _ULTRA_H_
+#define _ULTRA_H_
+
 #include "Unit.h"
 
 class Ultra :
-	public StarUnit
+	public Unit
 {
 private:
 	static int msprStop[];
@@ -13,8 +15,10 @@ public:
 	virtual int GetAllImageCount() { return 265; }
 	virtual int GetUnitImageCount() { return 255; }
 
-	virtual StarUnit *GetInstance() { return new Ultra; }
+	virtual Unit *GetInstance() { return new Ultra; }
 
 	Ultra();
 	~Ultra();
 };
+
+#endif
