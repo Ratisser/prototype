@@ -66,4 +66,5 @@ void Game::ClearSelectedUnit() {
 	for (int i = 0; i < 12; i++) {
 		mSelectedUnit[i] = nullptr;
 	}
+	mSelectedUnitCount = 0;
 }

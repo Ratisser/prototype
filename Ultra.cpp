@@ -11,8 +11,8 @@ Ultra::Ultra()
 	mMoveSpeed = 8.0f;
 	mUnitSize = 44;
 	SetImg(128, 128, RGB(0,0,0));
-	mStopSpr = msprStop;
-	mMoveSpr = msprMove;
+	mpStopSpr = msprStop;
+	mpMoveSpr = msprMove;
 	mMoveSprCount = 9;
 }
 

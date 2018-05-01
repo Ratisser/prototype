@@ -3,7 +3,6 @@
 //
 // Unit클래스
 // Unit의 생성, 행동을 결정
-// 추상클래스
 //
 //=================================================
 
@@ -12,12 +11,13 @@
 
 #include "Vector2.h"
 #include "GameFramework.h"
-#include "List.h"
+#include <list>
+using namespace std;
 
 #define MAX_UNIT_COUNT 100
 
 typedef enum _eUnitState {
-	STOP,WATCH, MOVE, ATTACK, COLLISION
+	STOP, WATCH, MOVE, ATTACK, COLLISION
 }eUnitState;
 
 typedef enum _eUnitID {
@@ -30,7 +30,17 @@ typedef struct _Image {
 	UINT transColor;
 }Image;
 
-class List;
+typedef struct _Sprite {
+	int				*pStopSpr;
+	int				*pWatchSpr;
+	int				*pMoveSpr;
+	int				*pAtkSpr;
+	int				watchMaxCount;
+	int				moveMaxCount;
+	int				atkMaxCount;
+	int				animCount;
+	int				renderTarget;
+}Sprite;
 
 class Unit
 {
@@ -47,27 +57,32 @@ private:
 	//-----------------------------------------
 protected:
 	// Unit Attribute
-	eUnitState		mUnitState;		// Unit State
-	eUnitID			mUnitID;
-	int				mAlliance;		// number?
-	int				mUnitSize;		// Size. radius
-	int				mUnitSight;		// Unit sight. radius
-	int				mUnitAtkRange;	// Unit Attack Range. radius
-	Unit			*mUnitAtkTarget;
-	List			*mNearUnitList;
+	eUnitState		mUnitState;			// Unit State
+	eUnitID			mUnitID;			// ID
+	int				mUnitMaxHP;
+	int				mUnitHP;
+	int				mUnitSize;			// Size. radius
+	int				mUnitSight;			// Unit sight. radius
+	int				mUnitAtkRange;		// Unit Attack Range. radius
+	int				mAlliance;			// number
+	Unit			*mpUnitAtkTarget;
 
 	// Unit Position
-	VECTOR2			mvPos;			// Unit Position
-	VECTOR2			mvDirection;	// Unit DirectionVector(normalized vector)
-	VECTOR2			mvTarget;		// to move
+	VECTOR2			mvPos;				// Unit Position
+	VECTOR2			mvDirection;		// normalized vector
+	VECTOR2			mvTarget;			// to move
 	float			mMoveSpeed;
 	int				mCollisionCount;
 	int				mDegree;
+	list<VECTOR2>	mMovePath;
 
 	// Unit Image & Sprite
-	int				*mStopSpr;
-	int				*mMoveSpr;
+	int				*mpStopSpr;
+	int				*mpMoveSpr;
+	int				*mpAtkSpr;
 	int				mMoveSprCount;
+	int				mAtkSprCount;
+	int				mAtkFrame;
 	int				mAnim;
 	int				mRenderTarget;
 	Image			mUnitImage;
@@ -75,6 +90,7 @@ protected:
 	// Timer
 	DWORD			mdwAnimTime;
 	DWORD			mdwWaitTime;
+	DWORD			mdwAktDelay;
 
 	//-----------------------------------------
 	// Static function 
@@ -92,6 +108,7 @@ protected:
 	void onChangeState();
 	void onStop();
 	void onMove();
+	void onAttack();
 
 	//-----------------------------------------
 	// Virtual function
@@ -125,9 +142,8 @@ public:
 	inline static int GetUnitCount() { return mUnitCount; }
 
 	inline void	SetPos(VECTOR2 mouse) { mvPos.x = mouse.x; mvPos.y = mouse.y; }
-	inline void	SetTargetVector(const VECTOR2 *vTarget)	{ mvTarget.x = vTarget->x; mvTarget.y = vTarget->y; }
+	inline list<VECTOR2> *GetMovePath() { return &mMovePath; }
 	inline VECTOR2 *GetPos() { return &mvPos; }
-	inline VECTOR2 *GetDir() { return &mvDirection; }
 	inline eUnitID GetUnitID() { return mUnitID; }
 	inline eUnitState GetState() { return mUnitState; }
 	inline int GetRenderTarget() { return mRenderTarget; }
@@ -135,6 +151,8 @@ public:
 	inline Image *GetImgInfo() { return &mUnitImage; }
 	inline int GetAlliance() { return mAlliance; }
 
+	DEBUG_GAME(inline VECTOR2 *GetTarget() { return &mvTarget; })
+	DEBUG_GAME(inline int GetAnim() { return mAnim; })
 
 	// non-inline fuction
 	void SetState(eUnitState state);
@@ -146,37 +164,6 @@ public:
 public:
 	Unit();
 	~Unit();
-};
-
-//===================================
-// List
-//===================================
-typedef struct _UnitNode {
-	Unit *pUnit;
-	struct _UnitNode *pNextNode;
-}UnitNode;
-
-class List
-{
-
-public:
-	UnitNode *mHeadNode;
-	UnitNode *mTailNode;
-	UnitNode *mCurrentNode;
-	int mCount;
-
-public:
-	void AddData(Unit *pUnit);
-	bool DeleteData(Unit *pUnit);
-	void DeleteAll();
-	Unit *PeekNode();
-
-	inline int GetListCount() { return mCount; }
-
-
-public:
-	List();
-	~List();
 };
 
 #endif

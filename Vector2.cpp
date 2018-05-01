@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "Vector2.h"
 
 
 void  Vec2Dir(VECTOR2 *pOut, const VECTOR2 *pV1, const VECTOR2 *pV2) {
@@ -11,4 +10,11 @@ void  Vec2Dir(VECTOR2 *pOut, const VECTOR2 *pV1, const VECTOR2 *pV2) {
 	pOut->y = pOut->y * pOut->y * ((pOut->y < 0) ? -1 : 1);
 	pOut->x /= len;
 	pOut->y /= len;
+}
+
+VECTOR2 Vec2Rotate(const VECTOR2 *pV, int dgree) {
+	VECTOR2 result;
+	result.x = pV->x * cos(dgree) - pV->y * sin(dgree);
+	result.y = pV->x * sin(dgree) + pV->y * cos(dgree);
+	return result;
 }

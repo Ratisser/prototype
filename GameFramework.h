@@ -16,26 +16,32 @@ class GameFramework
 private:
 	void fullScreenModeChange();
 protected:
-	HINSTANCE mhInst;
-	HWND mhWnd;
-	HDC mhBackBuffer;
-	HDC mhdc;
-	RECT mClientRect;
-	RECT mDragRect;
-	VECTOR2 mMousePoint;
-	VECTOR2 mMouseSP;
-	VECTOR2 mMouseEP;
-	int mDrag;
-	eMouseState mMouseState;
-	
+	HINSTANCE		mhInst;
+	HWND			mhWnd;
+	HDC				mhBackBuffer;
+	HDC				mhdc;
+	RECT			mClientRect;
+	RECT			mDragRect;
+	VECTOR2			mMousePoint;
+	VECTOR2			mMouseSP;
+	VECTOR2			mMouseEP;
+	int				mDrag;
+	eMouseState		mMouseState;
 
-	int mnFPS;
-	int mnFPSCount;
-	DWORD mdwOldTime;
-	DWORD mdwCurrentTime;
-	float mdwCurRenderTime;
-	float mdwOldRenderTime;
-	bool mbFullScreen;
+
+	int				mnFPS;
+	int				mnFPSCount;
+	DWORD			mdwOldTime;
+	DWORD			mdwCurrentTime;
+	bool			mbFullScreen;
+
+	LARGE_INTEGER	mFrequency;
+	LARGE_INTEGER	mOldTime;
+	LARGE_INTEGER	mCurTime;
+	LARGE_INTEGER	mOldRenderTime;
+	LARGE_INTEGER	mCurRenderTime;
+	LARGE_INTEGER	mElapsedTime;
+	float			mDeltaTime;
 
 protected:
 	virtual void SceneInit() {}

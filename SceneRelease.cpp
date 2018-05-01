@@ -19,4 +19,5 @@ void Game::SceneRelease() {
 	}
 	delete[] mhBit;
 
+	SoundManager::GetInstance()->Release();
 }

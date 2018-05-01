@@ -1,6 +1,6 @@
 #include "stdafx.h"
 
-
+/*
 List::List()
 {
 	mHeadNode = nullptr;
@@ -88,3 +88,5 @@ Unit *List::PeekNode() {
 	}
 	return returnVar;
 }
+
+*/

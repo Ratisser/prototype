@@ -52,6 +52,9 @@
     <Filter Include="소스 파일\-----Unit-----\Ultra">
       <UniqueIdentifier>{72b4be1a-6d7c-4d94-a2bc-ab22210887d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\-----Util-----\SoundManager">
+      <UniqueIdentifier>{d9f76c22-207f-43d8-8748-f3dcf69bcd2b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -92,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="List.h">
       <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>소스 파일\-----Util-----\SoundManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="List.cpp">
       <Filter>소스 파일\-----Unit-----\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>소스 파일\-----Util-----\SoundManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@ void Game::SceneRender() {
 	case GAME_INIT:
 	{
 		TextOut(mhBackBuffer, CLIENT_WIDTH / 2 - 100, CLIENT_HEIGHT / 2, L"로딩중", wcslen(L"로딩중"));
-		
+
 	}
 	break;
 	case GAME_TITLE:
@@ -33,7 +33,7 @@ void Game::SceneRender() {
 		// 선택된 유닛 원 그리기
 		//------------------------------
 		if (mSelectedUnitCount != 0) {
-			for (int i = 0; i < 12; i++)
+			for (int i = 0; i < 12; i++) {
 				if (mSelectedUnit[i] == nullptr) break;
 				else {
 					point = mSelectedUnit[i]->GetPos();
@@ -42,7 +42,7 @@ void Game::SceneRender() {
 					Ellipse(mhBackBuffer, point->x - unitSize - 5, point->y + unitSize, point->x + unitSize + 5, point->y + unitSize + 10);
 
 				}
-
+			}
 		}
 
 
@@ -78,8 +78,20 @@ void Game::SceneRender() {
 		_stprintf(mSystemMsg, _T("선택중인 유닛 : %d"), mSelectedUnitCount);
 		TextOut(mhBackBuffer, 0, 40, mSystemMsg, _tcslen(mSystemMsg));
 
-		DeleteDC(hRender);
-
+		DEBUG_GAME(
+			if (mSelectedUnitCount != 0) {
+				if (mSelectedUnit[0] == nullptr) break;
+				else {
+					_stprintf(mSystemMsg, _T("TargetVector : %f, %f"), mSelectedUnit[0]->GetTarget()->x, mSelectedUnit[0]->GetTarget()->y);
+					TextOut(mhBackBuffer, 0, 60, mSystemMsg, _tcslen(mSystemMsg));
+					_stprintf(mSystemMsg, _T("State : %d"), mSelectedUnit[0]->GetState());
+					TextOut(mhBackBuffer, 0, 80, mSystemMsg, _tcslen(mSystemMsg));
+					_stprintf(mSystemMsg, _T("Anim : %d"), mSelectedUnit[0]->GetAnim());
+					TextOut(mhBackBuffer, 0, 100, mSystemMsg, _tcslen(mSystemMsg));
+				}
+			}
+		)
+			DeleteDC(hRender);
 		break;
 	}
 	case GAME_DESTROY:

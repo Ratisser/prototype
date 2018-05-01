@@ -36,6 +36,11 @@ void GameFramework::Init(HINSTANCE hInst, HWND hWnd) {
 	HDC hdc;
 	HBITMAP hBit;
 
+	QueryPerformanceFrequency(&mFrequency);
+	QueryPerformanceCounter(&mOldTime);
+	QueryPerformanceCounter(&mOldRenderTime);
+	mdwOldTime = GetTickCount();
+
 	mhInst = hInst;
 	mhWnd = hWnd;
 	hdc = GetDC(mhWnd);
@@ -56,8 +61,6 @@ void GameFramework::Init(HINSTANCE hInst, HWND hWnd) {
 
 	ChangeScreenMode(0);
 
-	mdwOldTime = GetTickCount();
-	mdwOldRenderTime = GetTickCount();
 	SceneInit();
 
 }
@@ -68,27 +71,33 @@ void GameFramework::Update() {
 
 void GameFramework::Render() {
 	mdwCurrentTime = GetTickCount();
-	mdwCurRenderTime = GetTickCount();
-	if (mdwCurrentTime - mdwOldTime >= 1000)
-	{
-		mdwOldTime = mdwCurrentTime;
-		mnFPS = mnFPSCount;
-		mnFPSCount = 0;
+	QueryPerformanceCounter(&mCurTime);
+	QueryPerformanceCounter(&mCurRenderTime);
+	mElapsedTime.QuadPart = mCurTime.QuadPart - mOldTime.QuadPart;
+	mDeltaTime = mElapsedTime.QuadPart / (float)mFrequency.QuadPart;
+
+	if (mDeltaTime > 0.016666666) {
+		mOldTime = mCurTime;
+		if (mdwCurrentTime - mdwOldTime >= 1000)
+		{
+			mdwOldTime = mdwCurrentTime;
+			mnFPS = mnFPSCount;
+			mnFPSCount = 0;
+		}
+		HDC hdc = GetDC(mhWnd);
+
+		PatBlt(mhBackBuffer, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, BLACKNESS);
+
+		SceneRender();
+		if (mDrag) {
+			Rectangle(mhBackBuffer, mMouseSP.x, mMouseSP.y, mMouseEP.x, mMouseEP.y);
+		}
+
+		BitBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, mhBackBuffer, 0, 0, SRCCOPY);
+
+		ReleaseDC(mhWnd, hdc);
+		mnFPSCount++;
 	}
-	HDC hdc = GetDC(mhWnd);
-
-	PatBlt(mhBackBuffer, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, BLACKNESS);
-
-	SceneRender();
-	if (mDrag) {
-		Rectangle(mhBackBuffer, mMouseSP.x, mMouseSP.y, mMouseEP.x, mMouseEP.y);
-	}
-
-	BitBlt(hdc, 0, 0, CLIENT_WIDTH, CLIENT_HEIGHT, mhBackBuffer, 0, 0, SRCCOPY);
-
-	ReleaseDC(mhWnd, hdc);
-	mdwOldRenderTime = mdwCurRenderTime;
-	mnFPSCount++;
 }
 
 void GameFramework::MouseProcess(UINT msg, LPARAM lParam) {

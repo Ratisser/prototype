@@ -4,13 +4,11 @@ Unit* Unit::mpUnitList[MAX_UNIT_COUNT];
 int Unit::mUnitCount = 0;
 
 Unit::Unit() {
-	mNearUnitList = new List;
 	SetPos(Game::GetInstance()->GetMousePoint());
 	Stop();
 }
 
 Unit::~Unit() {
-	delete mNearUnitList;
 }
 
 void Unit::SetImg(int width, int height, UINT rgbColor) {
@@ -20,17 +18,21 @@ void Unit::SetImg(int width, int height, UINT rgbColor) {
 }
 
 void Unit::UnitProcess() {
-	
 
+	DWORD curTime = Game::GetInstance()->GetTime();
+	if (0 == mMovePath.empty()) mvTarget = mMovePath.front();
 	Vec2Dir(&mvDirection, &mvPos, &mvTarget);
 	mDegree = TODEG(Vec2Theta(&mvDirection)) / 20;
+
 
 	switch (mUnitState)
 	{
 	case STOP:
 		mCollisionCount = 0;
 		onStop();
-		SetState(WATCH);
+		if (curTime - mdwWaitTime > 100) {
+			SetState(WATCH);
+		}
 		break;
 	case WATCH:
 		checkRange();
@@ -38,30 +40,27 @@ void Unit::UnitProcess() {
 		break;
 	case MOVE:
 	{
-		// TODO : 애니메이션과 상태업데이트를 분리할 것(나중을 위해서)
-		DWORD curTime = Game::GetInstance()->GetTime();
 		if ((curTime - mdwAnimTime) > 33) {
 			onMove();
 			mdwAnimTime = curTime;
 		}
 		// 충돌 검사
-		Unit** pUnit = Unit::GetUnitList();
-		VECTOR2 *point;
-		int unitSize = mUnitSize * mUnitSize;
+		Unit** ppUnit = Unit::GetUnitList();
+		VECTOR2 *curUnitPoint;
+		int unitSize = mUnitSize;
 		int curUnitSize;
 		int distance;
 		int nUnitCount = Unit::GetUnitCount();
 		for (int i = 0; i < nUnitCount; i++) {
-			if ((*pUnit) == this) {
-				*pUnit++;
+			if ((*ppUnit) == this) {
+				*ppUnit++;
 				continue;
 			}
-			point = (*pUnit)->GetPos();
-			curUnitSize = (*pUnit)->GetUnitSize();
-			curUnitSize = curUnitSize * curUnitSize;
+			curUnitPoint = (*ppUnit)->GetPos();
+			curUnitSize = (*ppUnit)->GetUnitSize();
 			distance = curUnitSize + unitSize;
-			if (Vec2Dist(&mvPos, point)< distance) {
-				if ((*pUnit)->GetState() == MOVE || (*pUnit)->GetState() == COLLISION) {
+			if (Vec2Dist(&mvPos, curUnitPoint) < distance) {
+				if (0 && (*ppUnit)->GetState() == MOVE || (*ppUnit)->GetState() == COLLISION) {
 					mMoveSpeed *= -1;
 					onMove();
 					mMoveSpeed *= -1;
@@ -73,27 +72,57 @@ void Unit::UnitProcess() {
 					mMoveSpeed *= -1;
 					onMove();
 					mMoveSpeed *= -1;
-					Stop();
+					VECTOR2 temp = Vec2Rotate(&mvDirection, 45);
+					temp.x = temp.x * (20+curUnitSize) + mvPos.x;
+					temp.y = temp.y * (20+curUnitSize) + mvPos.y;
+					mMovePath.push_front(temp);
+					SetState(COLLISION);
 					return;
 				}
 			}
-			*pUnit++;
+			*ppUnit++;
 
 		}
 
-		if (Vec2Dist(&mvPos,&mvTarget) < 100) {
-			mUnitState = STOP;
+		if (Vec2Dist(&mvPos, &mvTarget) < 10) {
+			mMovePath.pop_front();
+			if (mMovePath.empty()) {
+				Stop();
+			}
 		}
+
 	}
 	break;
 	case ATTACK:
+		Vec2Dir(&mvDirection, &mvPos, &mvTarget);
+		mvTarget = *(mpUnitAtkTarget->GetPos());
+		if (Vec2Dist(&mvPos, &mvTarget) < mUnitAtkRange) {
+			if (curTime - mdwWaitTime < 1000) {
+				if ((curTime - mdwAnimTime) > 33) {
+					onAttack();
+					mdwAnimTime = curTime;
+				}
+			}
+			else {
+				Attack();
+			}
+		}
+		else {
+			Vec2Dir(&mvDirection, &mvPos, &mvTarget);
+			int needToMove = mUnitSight - mUnitAtkRange + 20;
+			VECTOR2 temp;
+			temp.x = mvDirection.x * needToMove + mvPos.x;
+			temp.y = mvDirection.y * needToMove + mvPos.y;
+			mMovePath.push_front(temp);
+			Move();
+		}
 		break;
 	case COLLISION:
 	{
 
 		DWORD curTime = Game::GetInstance()->GetTime();
-		if (curTime - mdwWaitTime > 500) {
-			if (++mCollisionCount > 5) {
+		if (curTime - mdwWaitTime > 100) {
+			if (++mCollisionCount > 6) {
 				Stop();
 				break;
 			}
@@ -109,19 +138,20 @@ void Unit::UnitProcess() {
 void Unit::checkRange() {
 	int nUnitCount = Unit::GetUnitCount();
 	Unit **ppUnit = GetUnitList();
-	mUnitAtkTarget = nullptr;
+	mpUnitAtkTarget = nullptr;
 	for (int i = 0; i < nUnitCount; i++) {
-		if ((Vec2Dist(&mvPos, (*ppUnit)->GetPos()) < mUnitSight * mUnitSight) && (*ppUnit)->GetAlliance() != mAlliance) {
-			if (mUnitAtkTarget == nullptr || (Vec2Dist(&mvPos, (*ppUnit)->GetPos())) < (Vec2Dist(&mvPos, mUnitAtkTarget->GetPos()))) {
-				mUnitAtkTarget = *ppUnit;
+		if ((Vec2Dist(&mvPos, (*ppUnit)->GetPos()) < mUnitSight) && (*ppUnit)->GetAlliance() != mAlliance) {
+			if (mpUnitAtkTarget == nullptr || (Vec2Dist(&mvPos, (*ppUnit)->GetPos())) < (Vec2Dist(&mvPos, mpUnitAtkTarget->GetPos()))) {
+				mpUnitAtkTarget = *ppUnit;
 				*ppUnit++;
 				continue;
 			}
 		}
 		*ppUnit++;
 	}
-	if (mUnitAtkTarget != nullptr) {
-		SetState(ATTACK);
+	if (mpUnitAtkTarget != nullptr) {
+		mvTarget = *(mpUnitAtkTarget->GetPos());
+		Attack();
 	}
 }
 
@@ -155,30 +185,47 @@ bool Unit::AddUnit(int i) {
 
 void Unit::onStop() {
 	mAnim = 0;
-	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * mStopSpr[mAnim] - (mDegree == 9);
+	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * mpStopSpr[mAnim] - (mDegree == 9);
 }
 
 void Unit::onMove() {
 	mvPos.x += mvDirection.x * mMoveSpeed;
 	mvPos.y += mvDirection.y * mMoveSpeed;
-	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * mMoveSpr[mAnim] - (mDegree == 9);
+	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * mpMoveSpr[mAnim] - (mDegree == 9);
 	mAnim++;
 	mAnim = mAnim % mMoveSprCount;
 
 }
 
+void Unit::onAttack() {
+	mRenderTarget = ((mDegree < 9) ? mDegree * 2 : 35 - mDegree * 2) + 17 * mpAtkSpr[mAnim] - (mDegree == 9);
+	if (mAnim == 3) SoundManager::GetInstance()->PlayAtk();
+	if (10 > mAnim) mAnim++;
+
+}
+
 void Unit::Stop() {
-	if (mUnitState != STOP) {
+		mdwWaitTime = Game::GetInstance()->GetTime();
 		SetState(STOP);
 		onChangeState();
-	}
 }
 
 void Unit::Move() {
-	if (mUnitState != MOVE) {
 		SetState(MOVE);
 		onChangeState();
+		mCollisionCount = 0;
+}
+
+void Unit::Attack() {
+	if (mUnitState == ATTACK) {
+		mAnim = mAtkFrame;
 	}
+	else {
+		mAnim = 0;
+
+	}
+	mdwWaitTime = Game::GetInstance()->GetTime();
+	SetState(ATTACK);
 }
 
 
@@ -199,7 +246,6 @@ void Unit::Release() {
 void Unit::onChangeState() {
 	mdwAnimTime = Game::GetInstance()->GetTime();
 	mAnim = 0;
-
 }
 
 bool Unit::RemoveUnit() {
@@ -211,6 +257,7 @@ bool Unit::RemoveUnit() {
 		delete mpUnitList[i];
 	}
 	mUnitCount = 0;
+	Game::GetInstance()->ClearSelectedUnit();
 	SendMessage(Game::GetInstance()->hList, LB_INSERTSTRING, 0, (LPARAM)L"유닛을 삭제했습니다.");
 	return true;
 

@@ -7,8 +7,9 @@ class Marine :
 	public Unit
 {
 private:
-	static int				msprStop[];
-	static int				msprMove[];
+	static int msprStop[];
+	static int msprMove[];
+	static int msprAttack[];
 
 public:
 	virtual int GetFilePath() { return IDS_MARINE_PATH; }

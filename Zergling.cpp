@@ -10,10 +10,11 @@ Zergling::Zergling()
 	mAlliance = 2;
 	mMoveSpeed = 8.0f;
 	mUnitSize = 14;
-	mUnitSight = 150;
+	mUnitSight = 30;
+	mUnitAtkRange = 20;
 	SetImg(128, 128, RGB(0, 0, 0));
-	mStopSpr = msprStop;
-	mMoveSpr = msprMove;
+	mpStopSpr = msprStop;
+	mpMoveSpr = msprMove;
 	mMoveSprCount = 8;
 }
 

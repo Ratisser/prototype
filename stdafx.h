@@ -6,6 +6,13 @@
 #ifndef _STDAFX_H_
 #define _STDAFX_H_
 
+#ifdef _DEBUG
+#define DEBUG_GAME(x) x
+#else
+#define DEBUG_GAME(x)
+#endif
+
+
 #include "targetver.h"
 
 #define WIN32_LEAN_AND_MEAN             // 거의 사용되지 않는 내용은 Windows 헤더에서 제외합니다.
@@ -28,6 +35,7 @@
 #include "Game.h"
 #include "List.h"
 #include "Vector2.h"
+#include "SoundManager.h"
 
 #include "Unit.h"
 #include "Marine.h"

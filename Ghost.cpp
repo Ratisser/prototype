@@ -11,8 +11,8 @@ Ghost::Ghost()
 	mMoveSpeed = 4.0f;
 	mUnitSize = 17;
 	SetImg(64, 64, RGB(0, 0, 0));
-	mStopSpr = msprStop;
-	mMoveSpr = msprMove;
+	mpStopSpr = msprStop;
+	mpMoveSpr = msprMove;
 	mMoveSprCount = 8;
 }
 
