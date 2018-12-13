@@ -97,7 +97,7 @@ protected:
 	//-----------------------------------------
 public:
 	static void Release();
-	static bool AddUnit(int i);
+	static bool AddUnit(int unitArrayIndex);
 	static bool RemoveUnit();
 
 	//-----------------------------------------
@@ -156,7 +156,7 @@ public:
 
 	// non-inline fuction
 	void SetState(eUnitState state);
-	void SetImg(int width, int height, UINT rgbColor);
+	void SetImg(int width, int height, UINT rgbColor); // set transparent color
 
 	//-----------------------------------------
 	// Constructor, Destructor

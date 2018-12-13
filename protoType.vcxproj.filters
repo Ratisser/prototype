@@ -25,35 +25,35 @@
     <Filter Include="소스 파일\-----Game-----\Game">
       <UniqueIdentifier>{2c051e9f-40c0-4e4a-b221-a23ec6fcda0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\-----Game-----\GameFrame">
-      <UniqueIdentifier>{e9dbb2d5-8ee5-468b-b408-105eb33f3b77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\-----Unit-----">
-      <UniqueIdentifier>{81c8c5ad-8c2e-4f1d-a2f9-a3dac179bdcd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\-----Unit-----\Unit">
-      <UniqueIdentifier>{e66653b2-0342-41b2-92f8-8b6e7b0a525e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\-----Unit-----\Marine">
-      <UniqueIdentifier>{838a3fe9-db8f-4a45-b001-bb02ec9d4a98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\-----Unit-----\Zergling">
-      <UniqueIdentifier>{8afad05b-c243-4ea6-a353-353492d01e76}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\-----WinMain-----">
       <UniqueIdentifier>{e29cf7c3-6a83-4cff-af1a-cdf8942e3d07}</UniqueIdentifier>
     </Filter>
     <Filter Include="소스 파일\-----WinMain-----\WinMain">
       <UniqueIdentifier>{cb71be12-831d-4d30-833e-07ad770fa5c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\-----Unit-----\Ghost">
-      <UniqueIdentifier>{dde2f69b-709b-4987-bf8c-086498ca8e6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="소스 파일\-----Unit-----\Ultra">
-      <UniqueIdentifier>{72b4be1a-6d7c-4d94-a2bc-ab22210887d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\-----Util-----\SoundManager">
       <UniqueIdentifier>{d9f76c22-207f-43d8-8748-f3dcf69bcd2b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\-----Unit-----">
+      <UniqueIdentifier>{81c8c5ad-8c2e-4f1d-a2f9-a3dac179bdcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\-----Unit-----\Unit">
+      <UniqueIdentifier>{e66653b2-0342-41b2-92f8-8b6e7b0a525e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\-----Unit-----\Marine">
+      <UniqueIdentifier>{838a3fe9-db8f-4a45-b001-bb02ec9d4a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\-----Unit-----\Zergling">
+      <UniqueIdentifier>{8afad05b-c243-4ea6-a353-353492d01e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\-----Unit-----\Ghost">
+      <UniqueIdentifier>{dde2f69b-709b-4987-bf8c-086498ca8e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\-----Unit-----\Ultra">
+      <UniqueIdentifier>{72b4be1a-6d7c-4d94-a2bc-ab22210887d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\-----Game-----\GameFrameWork">
+      <UniqueIdentifier>{e9dbb2d5-8ee5-468b-b408-105eb33f3b77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -73,28 +73,25 @@
       <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClInclude>
     <ClInclude Include="Marine.h">
-      <Filter>소스 파일\-----Unit-----\Marine</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Marine</Filter>
     </ClInclude>
     <ClInclude Include="Zergling.h">
-      <Filter>소스 파일\-----Unit-----\Zergling</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Zergling</Filter>
     </ClInclude>
     <ClInclude Include="Ultra.h">
-      <Filter>소스 파일\-----Unit-----\Ultra</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Ultra</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
     </ClInclude>
     <ClInclude Include="GameFramework.h">
-      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
+      <Filter>소스 파일\-----Game-----\GameFrameWork</Filter>
     </ClInclude>
     <ClInclude Include="Ghost.h">
-      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Ghost</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
-    </ClInclude>
-    <ClInclude Include="List.h">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Unit</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>소스 파일\-----Util-----\SoundManager</Filter>
@@ -108,43 +105,28 @@
       <Filter>소스 파일\-----WinMain-----\WinMain</Filter>
     </ClCompile>
     <ClCompile Include="Marine.cpp">
-      <Filter>소스 파일\-----Unit-----\Marine</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Marine</Filter>
     </ClCompile>
     <ClCompile Include="Zergling.cpp">
-      <Filter>소스 파일\-----Unit-----\Zergling</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Zergling</Filter>
     </ClCompile>
     <ClCompile Include="Ultra.cpp">
-      <Filter>소스 파일\-----Unit-----\Ultra</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Ultra</Filter>
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>소스 파일\-----Util-----\Vector2D</Filter>
     </ClCompile>
     <ClCompile Include="GameFramework.cpp">
-      <Filter>소스 파일\-----Game-----\GameFrame</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneRender.cpp">
-      <Filter>소스 파일\-----Game-----\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneUpdate.cpp">
-      <Filter>소스 파일\-----Game-----\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneInit.cpp">
-      <Filter>소스 파일\-----Game-----\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneRelease.cpp">
-      <Filter>소스 파일\-----Game-----\Game</Filter>
+      <Filter>소스 파일\-----Game-----\GameFrameWork</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>소스 파일\-----Game-----\Game</Filter>
     </ClCompile>
     <ClCompile Include="Ghost.cpp">
-      <Filter>소스 파일\-----Unit-----\Ghost</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Ghost</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
-    </ClCompile>
-    <ClCompile Include="List.cpp">
-      <Filter>소스 파일\-----Unit-----\Unit</Filter>
+      <Filter>소스 파일\-----Game-----\-----Unit-----\Unit</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>소스 파일\-----Util-----\SoundManager</Filter>
