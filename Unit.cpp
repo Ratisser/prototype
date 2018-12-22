@@ -68,7 +68,7 @@ void Unit::UnitProcess() {
 					return;
 				}
 				else {
-					// TODO : 길찾기 알고리즘 (현재는 겹칠경우 반대로 이동)
+					// TODO : 길찾기 알고리즘 (현재는 겹칠경우 방향을 틀어서 이동)
 					mMoveSpeed *= -1;
 					onMove();
 					mMoveSpeed *= -1;

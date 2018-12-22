@@ -6,7 +6,7 @@
 #include "Vector2.h"
 
 #pragma warning(disable:4996)
-#pragma comment(lib, "msimg32.lib")
+#pragma comment(lib, "msimg32.lib") // 
 
 #define MAX_UNIT_SPECIES 4
 
