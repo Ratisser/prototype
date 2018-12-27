@@ -9,7 +9,7 @@ Ultra::Ultra()
 	mUnitID = ULTRA;
 	mAlliance = 2;
 	mMoveSpeed = 8.0f;
-	mUnitSize = 44;
+	mUnitSize = 40;
 	SetImg(128, 128, RGB(0,0,0));
 	mpStopSpr = msprStop;
 	mpMoveSpr = msprMove;

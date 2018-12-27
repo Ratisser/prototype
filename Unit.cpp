@@ -73,8 +73,8 @@ void Unit::UnitProcess() {
 					onMove();
 					mMoveSpeed *= -1;
 					VECTOR2 temp = Vec2Rotate(&mvDirection, 45);
-					temp.x = temp.x * (20+curUnitSize) + mvPos.x;
-					temp.y = temp.y * (20+curUnitSize) + mvPos.y;
+					temp.x = temp.x * (30+curUnitSize) + mvPos.x;
+					temp.y = temp.y * (30+curUnitSize) + mvPos.y;
 					mMovePath.push_front(temp);
 					SetState(COLLISION);
 					return;
@@ -122,7 +122,7 @@ void Unit::UnitProcess() {
 
 		DWORD curTime = Game::GetInstance()->GetTime();
 		if (curTime - mdwWaitTime > 100) {
-			if (++mCollisionCount > 6) {
+			if (++mCollisionCount > 8) {
 				Stop();
 				break;
 			}
